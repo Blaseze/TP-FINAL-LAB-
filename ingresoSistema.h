@@ -19,13 +19,14 @@ typedef struct
 {
     char usuarioAdministrativo[10];
     char contraAdministrativo[10];
+     int nivel;//1 
 }UsuarioAdministrativo;
 
 typedef struct
 {
     char usuarioTecnico[10];
     char contraTecnico[10];
-    char contraEspecial[10];///contraseña default para crear este tipo de usuario
+     int nivel;//2 tecnico
 }UsuarioTecnico;
 
 

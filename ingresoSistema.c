@@ -28,15 +28,27 @@ void crearUsuarioPaciente(Paciente paciente)
 }
 void crearUsuarioEmpleado(empleados_laboratorio empleados)
 {
-    UsuarioAdministrativo usuarioE;
+    UsuarioAdministrativo usuarioA;
+    UsuarioTecnico usuarioT;
     FILE* archiEmpleados=fopen("UsuariosEmpleados.dat","ab");
 
 
-    if(archiUsuarios)
+    if(archiEmpleados)
     {
-           strcpy(usuarioE.dniPaciente,empleados.DNI);
-           strcpy(usuarioE.contrasenia,empleados.DNI);
-           fwrite(&usuarioE,sizeof(UsuarioAdministrativo),1,archiEmpleados);
+        if(strcmpy(empleados.perfil,"administrativo")==0)
+        {
+            strcpy(usuarioA.usuarioAdministrativo,empleados.dni);
+           usuarioA.contraAdministrativo=empleados.passEmpleado;
+           usuarioA.nivel=1;
+           fwrite(&usuarioA,sizeof(usuarioAdministrativo),1,archiEmpleados);
+        }
+        else {
+           strcpy(usuarioT.usuarioTecnico,empleados.dni);
+           usuarioT.contraTecnico=empleados.passEmpleado;
+           usuarioT.nivel=2;
+           fwrite(&usuarioT,sizeof(UsuarioTecnico),1,archiEmpleados);
+        }        
+
            fclose(archiEmpleados);
     }
 }
