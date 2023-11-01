@@ -18,7 +18,7 @@ void guardarUnEmpleado(char nombreArchivo[] , empleados_laboratorio emple)
         printf("\n DATOS DEL EMPLEADO: \n\n");
         mostrarUnEmpleado(emple);
 
-        printf("\n EMPLEADO GUARDADO CON %cXITO \n\n" , 144);
+        printf("\n EMPLEADO CARGADO CON %cXITO \n\n" , 144);
 
     }else{
         printf(" ERROR en la apertura del archivo. \n\n");
@@ -284,7 +284,7 @@ int verificarApeYNombre(char apeYnombreEmpleado[])
         int i = 0;
 
         while((i < longitud) && (apeYnombreValido == 1)){
-            //utilizo el código ascii para verificar que no ingrese algún caracter especial o número
+            //utilizo el cÃ³digo ascii para verificar que no ingrese algÃºn caracter especial o nÃºmero
             if((apeYnombreEmpleado[i] >= 65 && apeYnombreEmpleado[i] <= 90) || (apeYnombreEmpleado[i] == -91) || (apeYnombreEmpleado[i] >= 97 && apeYnombreEmpleado[i] <= 122) || (apeYnombreEmpleado[i] == -92 ) || (apeYnombreEmpleado[i] == 32)){
                 i++;
             }else{
@@ -298,7 +298,7 @@ int verificarApeYNombre(char apeYnombreEmpleado[])
 
 int verificarDni(char dniEmple[])
 {
-    int dniValido = 1; //arranco en 1 porque supongo que el dni ingresado es válido
+    int dniValido = 1; //arranco en 1 porque supongo que el dni ingresado es vÃ¡lido
     int longitud = strlen(dniEmple);
     int i = 0;
 
@@ -306,7 +306,7 @@ int verificarDni(char dniEmple[])
         dniValido = 0;
     }else{
         while((i < longitud) && (dniValido == 1)){
-            if((dniEmple[i] >= 48 && dniEmple[i] <= 57) && (dniEmple[0] != '0')){ //utilizo el código ascii para verificar que solo se ingrese números
+            if((dniEmple[i] >= 48 && dniEmple[i] <= 57) && (dniEmple[0] != '0')){ //utilizo el cÃ³digo ascii para verificar que solo se ingrese nÃºmeros
                 i++;
             }else{
                 dniValido = 0;
@@ -366,7 +366,7 @@ int verificarPerfilEmpleado(char perfilEmpleado[])
         int i;
 
         for(i=0 ; perfilEmpleado[i] ; i++){
-            perfilMin[i] = tolower(perfilEmpleado[i]); //convierto toda la cadena a minúscula
+            perfilMin[i] = tolower(perfilEmpleado[i]); //convierto toda la cadena a minÃºscula
         }
 
         perfilMin[strlen(perfilEmpleado)] = '\0'; //agrego el caracter para indicar el final del string
