@@ -17,17 +17,11 @@ typedef struct
 
 typedef struct
 {
-    char usuarioAdministrativo[10];
-    char contraAdministrativo[10];
-     int nivel;//1 
-}UsuarioAdministrativo;
+    char usuarioEmpleado[10];
+    char contraEmpleado[10];
+     int nivel;//
+}UsuarioEmpleado;
 
-typedef struct
-{
-    char usuarioTecnico[10];
-    char contraTecnico[10];
-     int nivel;//2 tecnico
-}UsuarioTecnico;
 
 
 #endif // INGRESOSISTEMA_H_INCLUDED
