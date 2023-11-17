@@ -52,7 +52,94 @@ void crearUsuarioEmpleado(empleados_laboratorio empleados)
     }
 }
 ///Primera vez que entra al sistema generar nueva clave antes de seguir a ver los estudios
+void cambiarContraseñaPacientes(char archivoP[30])///archivo de pacientes
+{
+UsuarioPaciente p;
+UsuarioPaciente aux;
+int i=0;
+int j=3;
+char comprobacion[10];
+int flag=0;
+FILE*archi=fopen(archivoP,"r+b");
+if(archi)
+{
+    while ((fread(&p,sizeof(UsuarioPaciente)1,archi)>0) && flag==0)
+    {
+        while(!feof(archi) && aux.dniPaciente==p.dniPaciente && j>0)
+        {
+            printf("Ingrese nueva contrasenia:\n");
+            fflush(stdin);
+            gets(aux.contrasenia);
+            printf("Ingrese nuevamente contrasenia:\n");
+            fflush(stdin);
+            gets(comprobacion);
+            if(strcmp(aux.contrasenia,comprobacion)==0)
+            {
+                flag=1;
+                fseek(archi,sizeof(UsuarioPaciente)*(i-1),SEEK_SET);
+                strcpy(p.contrasenia,aux.contrasenia);
+                fwrite(&p,sizeof(UsuarioPaciente),1,archi);
+            }
+            else
+            {
+                printf("Las contrasenias no coinciden, vuelva a intentarlo\n");
+                j--;
+                if(j==0)
+                {
+                    printf("Realizaste demasiados intentos\n");
+                }
+            }
+        }
+        i++;
+    }
+    fclose(archi);
+}
+void cambiarContraseñaEmpleados(char archivoP[30])///archivo de empleados
+{
+UsuarioEmpleado e;
+UsuarioEmpleado aux;
+int i=0;
+int j=3;
+char comprobacion[10];
+int flag=0;
+FILE*archi=fopen(archivoP,"r+b");
+if(archi)
+{
+    while ((fread(&e,sizeof(UsuarioEmpleado)1,archi)>0) && flag==0)
+    {
+        while(!feof(archi) && aux.usuarioEmpleado==e.usuarioEmpleado && j>0)
+        {
+            printf("Ingrese nueva contrasenia:\n");
+            fflush(stdin);
+            gets(aux.contraEmpleado);
+            printf("Ingrese nuevamente contrasenia:\n");
+            fflush(stdin);
+            gets(comprobacion);
+            if(strcmp(aux.contraEmpleado,comprobacion)==0)
+            {
+                flag=1;
+                fseek(archi,sizeof(UsuarioEmpleado)*(i-1),SEEK_SET);
+                strcpy(e.contraEmpleado,aux.contraEmpleado);
+                fwrite(&p,sizeof(UsuarioEmpleado),1,archi);
+            }
+            else
+            {
+                printf("Las contrasenias no coinciden, vuelva a intentarlo\n");
+                j--;
+                if(j==0)
+                {
+                    printf("Realizaste demasiados intentos\n");
+                }
+            }
+        }
+        i++;
+    }
+    fclose(archi);
+}
 
+
+}
+}
 int ingresarUsuarioPaciente()
 {
    UsuarioPaciente usuarioP;
@@ -60,8 +147,6 @@ int ingresarUsuarioPaciente()
     int i=5;
     FILE*archi=fopen("UsuariosPacientes.dat","r+b");
     int flag = 0;
-
-
 
     if(archi)
     {
@@ -82,7 +167,6 @@ int ingresarUsuarioPaciente()
             if(strcmp(aux.dniPaciente,usuarioP.dniPaciente) == 0 && strcmp(aux.contrasenia,usuarioP.contrasenia))
             {
                 flag = 1;
-
             }
             else
             {
@@ -91,22 +175,19 @@ int ingresarUsuarioPaciente()
                 flag = 0;
                 i--;
             }
-
         }
         fclose(archi);
     }
 
     return flag;
 }
-UsuarioEmpleado ingresarUsuarioEmpleado()
+int ingresarUsuarioEmpleado()
 {
     UsuarioEmpleado aux;
     UsuarioEmpleado usuarioE;
     int i=5;
     FILE*archi=fopen("UsuariosEmpleados.dat","r+b");
     int flag = 0;
-
-
 
     if(archi)
     {
@@ -120,13 +201,23 @@ UsuarioEmpleado ingresarUsuarioEmpleado()
 
             printf("CONTRASENIA: ");
             fflush(stdin);
-           gets(aux.contraEmpleado);
+            gets(aux.contraEmpleado);
             printf("-------------------------\n ");
             fread(&usuarioP,sizeof(UsuarioPaciente),1,archi);
 
+
             if(strcmp(aux.usuarioEmpleado,usuarioE.usuarioEmpleado) == 0 && strcmp(aux.contraEmpleado,usuarioE.contraEmpleado))
             {
-                flag = 1;
+                flag = 1; 
+                aux.nivel=usuarioE.nivel;
+                if(aux.nivel==1)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 2;
+                }
             }
             else
             {
@@ -139,8 +230,9 @@ UsuarioEmpleado ingresarUsuarioEmpleado()
         fclose(archi);
     }
 
-    return aux;
+return 0;
 }
+
 void menuPaciente()
 {
 int flag=ingresarUsuarioPaciente();
@@ -159,23 +251,21 @@ case 1:
 //ver estudios
 //break
 case 2:
-//cambiar contraseña
+cambiarContraseñaPacientes("UsuariosPacientes.dat");
 //break
 case 3: 
 //return 0;
 //break
 }
-
+}
 }
 
-}
 void menuEmpleado()
 {
-
-UsuarioEmpleado aux=ingresarUsuarioEmpleado();
+int nivel=ingresarUsuarioEmpleado();
 int eleccion=0;
 
-if(aux.nivel==1)///administrativo
+if(nivel==1)///administrativo
 {
 printf("1:CARGAR PACIENTE\n");
 printf("2:CARGAR PRACTICAS\n");
@@ -188,25 +278,25 @@ scanf("%i",&eleccion);
 switch(eleccion)
 {
 case 1:
-//cargar paciente
+//cargar paciente arboles
 //break
 case 2:
-//cargar practica
+//cargar practica arboles y listas
 //break
 case 3:
-//modificar practicas
+//modificar practicas 
 //break
 case 4:
-//Mostrar empleados laboratorio
+//Mostrar empleados laboratorio archivo
 //break
 case 5:
-//cambiar contraseña
+cambiarContraseñaEmpleados("UsuariosEmpleados.dat");
 //break
 case 6: 
 //return 0;
 //break
 }
-else///nivel 2 tecnico bioquimico
+else if (nivel==2)///nivel 2 tecnico bioquimico
 {
 printf("1:CARGAR RESULTADO\n");
 printf("2:MODIFICAR RESULTADO\n");
@@ -223,13 +313,18 @@ case 2:
 //MODIFIVAR RESULTADO
 //break
 case 3:
-//CAMBIAR CONTRAS
+cambiarContraseñaEmpleados("UsuariosEmpleados.dat");
 //break
 case 4:
 //return 0;
 //break
 }
+else
+{
+    break;
 }
+}
+
 void menu()
 {
     int eleccion=0;
@@ -254,7 +349,8 @@ void menu()
      }
      else
      {
-        printf("eleccion invalida")
+        printf("eleccion invalida");
+        break;
      }
      }
      else if(eleccion==2)
@@ -268,6 +364,7 @@ void menu()
      else
      {
         printf("eleccion invalida")
+        break;
      }
 }
 
