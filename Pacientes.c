@@ -99,19 +99,13 @@ int verificaDireccion(char direccion[])
     {
         for(int i=0; i< tamanio; i++)
         {
-            if(!isalnum(direccion[i])) // la funcion isalnum verifica que la direccion no tenga ningun caracter especial solo letras y numeros
+            if(!isalnum(direccion[i]) && direccion[i]!= ' ' ) // la funcion isalnum verifica que la direccion no tenga ningun caracter especial solo letras y numeros
             {
                 flag=0;
             }
         }
     }
-//    for(int i=0; i< strlen(direccion);i++)
-//        {
-//            if(isalnum((int)direccion))
-//            {
-//                flag=0;
-//            }
-//        }
+
     return flag;
 }
 
