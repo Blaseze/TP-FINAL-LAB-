@@ -141,7 +141,7 @@ void cargaEnArchivo(char nombreArchivo[])
         guardaUnaPersona(nombreArchivo,persona);
 
         system("cls");
-        printf("¿Desea cargar otro paciente? S/N\n\n");
+        printf("Â¿Desea cargar otro paciente? S/N\n\n");
         fflush(stdin);
         continuar=getch();
     }
