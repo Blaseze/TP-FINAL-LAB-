@@ -126,10 +126,10 @@ void muestraUnPaciente(paciente p)
 {
     printf("------------------------------------------------- \n");
     printf("Apellido y Nombre......: %s\n", p.apellidoYnombre);
-    printf("Edad...................: %s\n", p.edad);
-    printf("Dni....................: %d \n", p.dni);
+    printf("Edad...................: %d\n", p.edad);
+    printf("Dni....................: %s\n", p.dni);
     printf("Direccion..............: %s \n", p.direccion);
-    printf("Telefono.................: %s \n", p.telefono);
-    printf("Baja s/n.................: %s \n", (p.eliminados)?"SI":"NO");
+    printf("Telefono...............: %s \n", p.telefono);
+    printf("Baja s/n...............: %d \n", p.eliminados);
     printf("------------------------------------------------- \n");
 }
