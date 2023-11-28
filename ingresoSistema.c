@@ -1,4 +1,4 @@
-+#include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include "empleado.h"
 #include "ingresoSistema.h"
@@ -46,7 +46,7 @@ void crearUsuarioEmpleado(empleados_laboratorio empleados)
            aux.contraEmpleado=empleados.passEmpleado;
            aux.nivel=2;
            fwrite(&aux,sizeof(UsuarioEmpleado),1,archiEmpleados);
-        }        
+        }
 
            fclose(archiEmpleados);
     }
@@ -208,7 +208,7 @@ int ingresarUsuarioEmpleado()
 
             if(strcmp(aux.usuarioEmpleado,usuarioE.usuarioEmpleado) == 0 && strcmp(aux.contraEmpleado,usuarioE.contraEmpleado))
             {
-                flag = 1; 
+                flag = 1;
                 aux.nivel=usuarioE.nivel;
                 if(aux.nivel==1)
                 {
@@ -253,7 +253,7 @@ case 1:
 case 2:
 cambiarContraseñaPacientes("UsuariosPacientes.dat");
 //break
-case 3: 
+case 3:
 //return 0;
 //break
 }
@@ -284,7 +284,7 @@ case 2:
 //cargar practica arboles y listas
 //break
 case 3:
-//modificar practicas 
+//modificar practicas
 //break
 case 4:
 //Mostrar empleados laboratorio archivo
@@ -292,7 +292,7 @@ case 4:
 case 5:
 cambiarContraseñaEmpleados("UsuariosEmpleados.dat");
 //break
-case 6: 
+case 6:
 //return 0;
 //break
 }
