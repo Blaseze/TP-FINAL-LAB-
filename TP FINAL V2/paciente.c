@@ -108,6 +108,7 @@ paciente cargaPaciente(nodoarbol* arbol , paciente nuevoPaciente)
             }
 
         }
+        crearUsuarioPaciente(nuevoPaciente);
 
         nuevoPaciente.eliminados=0;
 

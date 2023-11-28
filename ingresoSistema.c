@@ -4,7 +4,7 @@
 #include "ingresoSistema.h"
 #include "string.h"
 
-void crearUsuarioPaciente(Paciente paciente)
+void crearUsuarioPaciente(paciente pacienteUsu)
 {
     UsuarioPaciente usuarioP;
     FILE* archiUsuarios=fopen("UsuariosPacientes.dat","ab");
@@ -12,8 +12,8 @@ void crearUsuarioPaciente(Paciente paciente)
 
     if(archiUsuarios)
     {
-           strcpy(usuarioP.dniPaciente,paciente.DNI);
-           strcpy(usuarioP.contrasenia,paciente.DNI);
+           strcpy(usuarioP.dniPaciente,pacienteUsu.DNI);
+           strcpy(usuarioP.contrasenia,pacienteUsu.DNI);
            fwrite(&usuarioP,sizeof(UsuarioPaciente),1,archiUsuarios);
            usuarioP.nivel=0;
            fclose(archiUsuarios);
@@ -301,16 +301,16 @@ switch(eleccion)
 {
 case 1:
 //cargar RESULTADO
-//break
+break;
 case 2:
 //MODIFIVAR RESULTADO
-//break
+break;
 case 3:
 cambiarContraseñaEmpleados("UsuariosEmpleados.dat");
-//break
+break;
 case 4:
-//return 0;
-//break
+return 0;
+break;
 }
 else
 {
@@ -338,7 +338,7 @@ void menu()
      }
      else if(eleccion2==2)
      {
-        menuEmpleado()
+        menuEmpleado();
      }
      else
      {
@@ -348,15 +348,15 @@ void menu()
      }
      else if(eleccion==2)
      {
-        ///crearempleado
+        ///crearempleado();
      }
      else if(eleccion==99)
      {
-        menudios()
+        menudios();
      }
      else
      {
-        printf("eleccion invalida")
+        printf("eleccion invalida");
         break;
      }
 }
