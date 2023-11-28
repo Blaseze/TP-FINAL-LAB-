@@ -22,6 +22,15 @@ typedef struct
      int nivel;//
 }UsuarioEmpleado;
 
+void crearUsuarioPaciente(Paciente paciente);
+void crearUsuarioEmpleado(empleados_laboratorio empleados);
+void cambiarContraseñaPacientes(char archivoP[30]);
+void cambiarContraseñaEmpleados(char archivoP[30]);
+int ingresarUsuarioPaciente();
+int ingresarUsuarioEmpleado();
+void menuPaciente();
+void menuEmpleado();
+void menu();
 
 
 #endif // INGRESOSISTEMA_H_INCLUDED
