@@ -4,13 +4,6 @@
 #include "ingresoSistema.h"
 #include "string.h"
 
-/** \brief esta funcion la llama el administrativo que crea un paciente
- *
- * \param Paciente paciente
- *
- *
- *
- */
 void crearUsuarioPaciente(Paciente paciente)
 {
     UsuarioPaciente usuarioP;
