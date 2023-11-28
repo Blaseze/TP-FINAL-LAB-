@@ -1,6 +1,6 @@
 #ifndef INGRESOSISTEMA_H_INCLUDED
 #define INGRESOSISTEMA_H_INCLUDED
-
+#include "paciente.h"
 typedef struct
 {
     char dniPaciente[30];
@@ -22,7 +22,7 @@ typedef struct
      int nivel;//
 }UsuarioEmpleado;
 
-void crearUsuarioPaciente(Paciente paciente);
+void crearUsuarioPaciente(paciente paciente);
 void crearUsuarioEmpleado(empleados_laboratorio empleados);
 void cambiarContraseñaPacientes(char archivoP[30]);
 void cambiarContraseñaEmpleados(char archivoP[30]);
