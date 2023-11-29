@@ -410,7 +410,105 @@ nodoarbol* pasarArchPacienteToArbol(char nombreArchivo[], nodoarbol* arbol)
 
     return arbol;
 }
+nodoarbol* tomar_nodo_mayor_valor (nodoarbol* arbol)
+{
+    nodoarbol* mayorValor = NULL;
 
+    if (arbol)
+        {
+        mayorValor = tomar_nodo_mayor_valor(arbol->der);
+
+        if (!mayorValor)
+            {
+            mayorValor = arbol;
+            }
+        }
+
+    return mayorValor;
+}
+
+nodoarbol* tomar_nodo_menor_valor (nodoarbol* arbol)
+{
+    nodoarbol* menorValor = NULL;
+
+    if (arbol)
+        {
+        menorValor = tomar_nodo_menor_valor(arbol->der);
+
+        if (!menorValor)
+            {
+            menorValor = arbol;
+            }
+        }
+
+    return menorValor;
+}
+
+nodoarbol* eliminar_nodo_de_arbol (nodoarbol* arbol, char dni[8])
+{
+
+    if (arbol)
+        {
+
+        if (strcmpi(arbol->dato.dni,dni)==0)
+            {
+
+            if (arbol->izq)
+                {
+
+                nodoarbol* basura = tomar_nodo_mayor_valor(arbol->izq);
+
+
+                arbol->der = eliminar_nodo_de_arbol(arbol->der, basura->dato.dni);
+
+
+                free(basura);
+                }
+
+            else
+                {
+
+                if (arbol->der)
+
+                    nodoarbol* basura = tomar_nodo_menor_valor(arbol->der);
+
+
+                    arbol->der = eliminar_nodo_de_arbol(arbol->der, arbol->dato);
+
+
+                    free(basura);
+                    }
+
+                else
+                    {
+
+                    free(arbol);
+
+
+                    arbol = NULL;
+                    }
+                }
+            }
+
+        else
+            {
+
+            if (strcmpi(dni,arbol->dato.dni)>0)
+                {
+
+                arbol->der = eliminar_nodo_de_arbol(arbol->der, dni);
+                }
+            /
+            else
+                {
+
+                arbol->izq = eliminar_nodo_de_arbol(arbol->izq, dni);
+                }
+            }
+        }
+
+    return arbol;
+}
 /// ----------------------------- FIN FUNCIONES DE ÁRBOL - PACIENTE -------------------------------- ///
 
 /// ----------------------------- FUNCIONES DE LISTA - PACIENTE ------------------------------------ ///

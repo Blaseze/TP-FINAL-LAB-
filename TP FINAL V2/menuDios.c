@@ -50,7 +50,7 @@ void menuDios()
 
                 break;
                 case 4:
-                cambiarContraseniaPacientes("UsuariosPacientes.dat",usuario);
+                cambiarContraseniaPacientes("UsuariosPacientes.dat",usuarioP);
                 break;
                 case 5:
             cargaDatosPrac
@@ -71,25 +71,31 @@ void menuDios()
 
                 break;
                 case 11:
+                    mostrarArchIngresos
 
                 break;
                 case 12:
 
                 break;
                 case 13:
-
+mostrarAdlEmpleados(adl)
                 break;
                 case 14:
-
+cambiarContraseniaEmpleados("UsuariosEmpleados.dat",usuarioE)
                 break;
                 case 15:
-
+modificarEmpleadoEnArchivo()
                 break;
                 case 16:
 
                 break;
                 case 17:
-
+                    mostrarAdlPacientes(adl);
+                    char dni[8];
+                    printf("Ingrese el dni del paciente que desea borrar.\n")
+                    fflush(stdin);
+                    gets(dni);
+                   eliminar_nodo_de_arbol(adl,dni);
                 break;
             case 18:
                 printf("Saliendo del programa. ¡Hasta luego!\n");
@@ -97,7 +103,7 @@ void menuDios()
             default:
                 printf("Opción no válida. Por favor, elija nuevamente.\n");
         }
-    } while (opcion != 4);
+    } while (opcion != 18);
 
 
 }

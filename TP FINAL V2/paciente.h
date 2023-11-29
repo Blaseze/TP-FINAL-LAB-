@@ -98,6 +98,9 @@ nodoarbol *insertar(nodoarbol *arbol,paciente dato);
 void mostrarArbolInOrder(nodoarbol *arbol);
 nodoarbol* buscarPacienteArbol(nodoarbol* arbol , char dniPaciente[]);
 nodoarbol* pasarArchPacienteToArbol(char nombreArchivo[] , nodoarbol* arbol);
+nodoarbol* tomar_nodo_mayor_valor (nodoarbol* arbol);
+nodoarbol* tomar_nodo_menor_valor (nodoarbol* arbol);
+nodoarbol* eliminar_nodo_de_arbol (nodoarbol* arbol, char dni[8]);
 
 ///FUNCIONES DE LISTA - PACIENTES
 nodoListaPaciente* iniclistaPaciente();
