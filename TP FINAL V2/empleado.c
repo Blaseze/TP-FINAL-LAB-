@@ -242,7 +242,6 @@ void mostrarUnEmpleado(empleados_laboratorio emple)
 
 int calculaCantRegistros(char nombreArchivo[] , int tamDato)
 {
-   empleados_laboratorio auxReg;
    int totalRegistros = 0;
    FILE *pArchivo = fopen(nombreArchivo , "rb");
 
