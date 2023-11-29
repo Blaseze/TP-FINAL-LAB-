@@ -3,6 +3,7 @@
 #include "empleado.h"
 #include "ingresoSistema.h"
 #include "string.h"
+#include "menuDios.h"
 
 void crearUsuarioPaciente(paciente pacienteUsu)
 {
@@ -392,7 +393,7 @@ void menu()
     }
     else if(eleccion==99)
     {
-        menudios();
+        menuDios();
     }
     else
     {
