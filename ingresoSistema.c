@@ -264,8 +264,9 @@ printf("1:CARGAR PACIENTE\n");
 printf("2:CARGAR PRACTICAS\n");
 printf("3:MODIFICAR PRACTICAS\n");
 printf("4:MOSTRAR EMPLEADOS LABORATORIO\n");
-printf("5:CAMBIAR CONTRASENIA\n");
-printf("6:SALIR\n");
+printf("5:MOSTRAR PACIENTES LABORATORIO\n");
+printf("6:CAMBIAR CONTRASENIA\n");
+printf("7:SALIR\n");
 fflush(stdin);
 scanf("%i",&eleccion);
 switch(eleccion)
@@ -280,9 +281,12 @@ case 3:
 //modificar practicas
 //break
 case 4:
-//Mostrar empleados laboratorio archivo
+//Mostrar empleados laboratorio archivo(ADENTRO DE ESTA PODER BUSCAR POR DNI
 //break
 case 5:
+    //Mostrar pacientes laboratorio archivo(adentro de esta funcion mostrar ingresos y poder selecionar 1
+//break
+case 6:
 cambiarContraseñaEmpleados("UsuariosEmpleados.dat");
 //break
 case 6:
@@ -293,8 +297,9 @@ else if (nivel==2)///nivel 2 tecnico bioquimico
 {
 printf("1:CARGAR RESULTADO\n");
 printf("2:MODIFICAR RESULTADO\n");
-printf("3:CAMBIAR CONTRASENIA\n");
-printf("4:SALIR\n");
+printf("3:VER PRACTICAS\n");
+printf("4:CAMBIAR CONTRASENIA\n");
+printf("5:SALIR\n");
 fflush(stdin);
 scanf("%i",&eleccion);
 switch(eleccion)
@@ -306,9 +311,11 @@ case 2:
 //MODIFIVAR RESULTADO
 break;
 case 3:
+    // VER PRACTICAS(ADENTRO DE ESTO PERMITIR BUSQUEDA DE PRACTICAS POR TECLADO
+case 4:
 cambiarContraseñaEmpleados("UsuariosEmpleados.dat");
 break;
-case 4:
+case 5:
 return 0;
 break;
 }

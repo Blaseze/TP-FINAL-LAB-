@@ -217,6 +217,7 @@ empleados_laboratorio cargaDatosEmpleado(char nombreArchivo[] , empleados_labora
         }
     }
 
+    crearUsuarioEmpleado(emple);
     emple.estado = 1;
 
     return emple;

@@ -1,6 +1,7 @@
 #ifndef INGRESOSISTEMA_H_INCLUDED
 #define INGRESOSISTEMA_H_INCLUDED
 #include "paciente.h"
+#include "empleado.h"
 typedef struct
 {
     char dniPaciente[30];
