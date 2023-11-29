@@ -12,8 +12,8 @@ void crearUsuarioPaciente(paciente pacienteUsu)
 
     if(archiUsuarios)
     {
-           strcpy(usuarioP.dniPaciente,pacienteUsu.DNI);
-           strcpy(usuarioP.contrasenia,pacienteUsu.DNI);
+           strcpy(usuarioP.dniPaciente,pacienteUsu.dni);
+           strcpy(usuarioP.contrasenia,pacienteUsu.dni);
            fwrite(&usuarioP,sizeof(UsuarioPaciente),1,archiUsuarios);
            usuarioP.nivel=0;
            fclose(archiUsuarios);
@@ -29,14 +29,14 @@ void crearUsuarioEmpleado(empleados_laboratorio empleados)
     {
         if(strcmpy(empleados.perfil,"administrativo")==0)
         {
-            strcpy(aux.usuarioEmpleado,empleados.dni);
-           aux.contraEmpleado=empleados.passEmpleado;
+           strcpy(aux.usuarioEmpleado,empleados.dni);
+           strcpy(aux.contraEmpleado,empleados.passEmpleado);
            aux.nivel=1;
            fwrite(&aux,sizeof(UsuarioEmpleado),1,archiEmpleados);
         }
         else {
            strcpy(aux.usuarioEmpleado,empleados.dni);
-           aux.contraEmpleado=empleados.passEmpleado;
+           strcpy(aux.contraEmpleado,empleados.passEmpleado);
            aux.nivel=2;
            fwrite(&aux,sizeof(UsuarioEmpleado),1,archiEmpleados);
         }
@@ -45,10 +45,9 @@ void crearUsuarioEmpleado(empleados_laboratorio empleados)
     }
 }
 ///Primera vez que entra al sistema generar nueva clave antes de seguir a ver los estudios
-void cambiarContraseñaPacientes(char archivoP[30])///archivo de pacientes
+void cambiarContraseniaPacientes(char archivoP[30], UsuarioPaciente usuario)///archivo de pacientes
 {
-UsuarioPaciente p;
-UsuarioPaciente aux;
+UsuarioPaciente registro;
 int i=0;
 int j=3;
 char comprobacion[10];
@@ -56,22 +55,22 @@ int flag=0;
 FILE*archi=fopen(archivoP,"r+b");
 if(archi)
 {
-    while ((fread(&p,sizeof(UsuarioPaciente)1,archi)>0) && flag==0)
+    while ((fread(&registro,sizeof(UsuarioPaciente),1,archi)) && flag==0)
     {
-        while(!feof(archi) && aux.dniPaciente==p.dniPaciente && j>0)
+        while(!feof(archi) && usuario.dniPaciente==registro.dniPaciente && j>0)
         {
             printf("Ingrese nueva contrasenia:\n");
             fflush(stdin);
-            gets(aux.contrasenia);
-            printf("Ingrese nuevamente contrasenia:\n");
+            gets(usuario.contrasenia);
+            printf("Ingrese nuevamente la contrasenia:\n");
             fflush(stdin);
             gets(comprobacion);
-            if(strcmp(aux.contrasenia,comprobacion)==0)
+            if(strcmp(usuario.contrasenia,comprobacion)==0)
             {
                 flag=1;
                 fseek(archi,sizeof(UsuarioPaciente)*(i-1),SEEK_SET);
-                strcpy(p.contrasenia,aux.contrasenia);
-                fwrite(&p,sizeof(UsuarioPaciente),1,archi);
+                strcpy(registro.contrasenia,usuario.contrasenia);
+                fwrite(&registro,sizeof(UsuarioPaciente),1,archi);
             }
             else
             {
@@ -80,6 +79,7 @@ if(archi)
                 if(j==0)
                 {
                     printf("Realizaste demasiados intentos\n");
+                    break;
                 }
             }
         }
@@ -87,10 +87,11 @@ if(archi)
     }
     fclose(archi);
 }
-void cambiarContraseñaEmpleados(char archivoP[30])///archivo de empleados
+}
+
+void cambiarContraseniaEmpleados(char archivoP[30],UsuarioEmpleado empleado)///archivo de empleados
 {
-UsuarioEmpleado e;
-UsuarioEmpleado aux;
+UsuarioEmpleado registro;
 int i=0;
 int j=3;
 char comprobacion[10];
@@ -98,22 +99,22 @@ int flag=0;
 FILE*archi=fopen(archivoP,"r+b");
 if(archi)
 {
-    while ((fread(&e,sizeof(UsuarioEmpleado)1,archi)>0) && flag==0)
+    while ((fread(&registro,sizeof(UsuarioEmpleado),1,archi)) && flag==0)
     {
-        while(!feof(archi) && aux.usuarioEmpleado==e.usuarioEmpleado && j>0)
+        while(!feof(archi) && registro.usuarioEmpleado==empleado.usuarioEmpleado && j>0)
         {
             printf("Ingrese nueva contrasenia:\n");
             fflush(stdin);
-            gets(aux.contraEmpleado);
+            gets(empleado.contraEmpleado);
             printf("Ingrese nuevamente contrasenia:\n");
             fflush(stdin);
             gets(comprobacion);
-            if(strcmp(aux.contraEmpleado,comprobacion)==0)
+            if(strcmp(empleado.contraEmpleado,comprobacion)==0)
             {
                 flag=1;
                 fseek(archi,sizeof(UsuarioEmpleado)*(i-1),SEEK_SET);
-                strcpy(e.contraEmpleado,aux.contraEmpleado);
-                fwrite(&p,sizeof(UsuarioEmpleado),1,archi);
+                strcpy(registro.contraEmpleado,empleado.contraEmpleado);
+                fwrite(&registro,sizeof(UsuarioEmpleado),1,archi);
             }
             else
             {
@@ -130,16 +131,15 @@ if(archi)
     fclose(archi);
 }
 
-
 }
-}
-int ingresarUsuarioPaciente()
+UsuarioPaciente ingresarUsuarioPaciente()
 {
-   UsuarioPaciente usuarioP;
+    UsuarioPaciente usuarioP;
     UsuarioPaciente aux;
     int i=5;
     FILE*archi=fopen("UsuariosPacientes.dat","r+b");
     int flag = 0;
+    char dni[8];
 
     if(archi)
     {
@@ -153,13 +153,16 @@ int ingresarUsuarioPaciente()
 
             printf("CONTRASENIA: ");
             fflush(stdin);
-           gets(aux.contrasenia);
+            gets(aux.contrasenia);
             printf("-------------------------\n ");
             fread(&usuarioP,sizeof(UsuarioPaciente),1,archi);
 
             if(strcmp(aux.dniPaciente,usuarioP.dniPaciente) == 0 && strcmp(aux.contrasenia,usuarioP.contrasenia))
             {
+
                 flag = 1;
+                return aux;
+
             }
             else
             {
@@ -172,9 +175,9 @@ int ingresarUsuarioPaciente()
         fclose(archi);
     }
 
-    return flag;
+    return break;
 }
-int ingresarUsuarioEmpleado()
+UsuarioEmpleado ingresarUsuarioEmpleado()
 {
     UsuarioEmpleado aux;
     UsuarioEmpleado usuarioE;
@@ -196,21 +199,14 @@ int ingresarUsuarioEmpleado()
             fflush(stdin);
             gets(aux.contraEmpleado);
             printf("-------------------------\n ");
-            fread(&usuarioP,sizeof(UsuarioPaciente),1,archi);
+            fread(&usuarioE,sizeof(UsuarioEmpleado),1,archi);
 
 
             if(strcmp(aux.usuarioEmpleado,usuarioE.usuarioEmpleado) == 0 && strcmp(aux.contraEmpleado,usuarioE.contraEmpleado))
             {
                 flag = 1;
-                aux.nivel=usuarioE.nivel;
-                if(aux.nivel==1)
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 2;
-                }
+                return aux;
+
             }
             else
             {
@@ -223,15 +219,15 @@ int ingresarUsuarioEmpleado()
         fclose(archi);
     }
 
-return 0;
+return break;
 }
 
 void menuPaciente()
 {
-int flag=ingresarUsuarioPaciente();
-int eleccion=0;
+   UsuarioPaciente usuario=ingresarUsuarioPaciente();
+   int eleccion=0;
 
-if(flag==1)
+if(usuario!= NULL)
 {
 printf("1:VER ESTUDIOS\n");
 printf("2:CAMBIAR CONTRASENIA\n");
@@ -241,24 +237,24 @@ scanf("%i",&eleccion);
 switch(eleccion)
 {
 case 1:
-//ver estudios
-//break
+mostrarEstudioPaciente(arbol,usuario);
+break;
 case 2:
-cambiarContraseñaPacientes("UsuariosPacientes.dat");
-//break
+cambiarContraseniaPacientes("UsuariosPacientes.dat",usuario);
+break;
 case 3:
-//return 0;
-//break
+return 0;
+break;
 }
 }
 }
 
 void menuEmpleado()
 {
-int nivel=ingresarUsuarioEmpleado();
+UsuarioEmpleado empleado=ingresarUsuarioEmpleado();
 int eleccion=0;
 
-if(nivel==1)///administrativo
+if(empleado.nivel==1)///administrativo
 {
 printf("1:CARGAR PACIENTE\n");
 printf("2:CARGAR PRACTICAS\n");
@@ -287,13 +283,14 @@ case 5:
     //Mostrar pacientes laboratorio archivo(adentro de esta funcion mostrar ingresos y poder selecionar 1
 //break
 case 6:
-cambiarContraseñaEmpleados("UsuariosEmpleados.dat");
+cambiarContraseniaEmpleados("UsuariosEmpleados.dat",empleado);
 //break
-case 6:
+case 7:
 //return 0;
 //break
 }
-else if (nivel==2)///nivel 2 tecnico bioquimico
+}
+else if (empleado.nivel==2)///nivel 2 tecnico bioquimico
 {
 printf("1:CARGAR RESULTADO\n");
 printf("2:MODIFICAR RESULTADO\n");
@@ -313,16 +310,19 @@ break;
 case 3:
     // VER PRACTICAS(ADENTRO DE ESTO PERMITIR BUSQUEDA DE PRACTICAS POR TECLADO
 case 4:
-cambiarContraseñaEmpleados("UsuariosEmpleados.dat");
+cambiarContraseniaEmpleados("UsuariosEmpleados.dat",empleado);
 break;
 case 5:
 return 0;
 break;
 }
+}
 else
 {
     break;
 }
+
+
 }
 
 void menu()

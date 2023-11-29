@@ -202,3 +202,27 @@
 1701169729 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\menudios.c
 	"menuDios.h"
 
+1701268004 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\empleado.c
+	"empleado.h"
+
+1701181237 c:\users\blase\documents\github\tp-final-lab-\tp final v2\empleado.h
+	<stdlib.h>
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+
+1701268015 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\listaempleados.c
+	"listaEmpleados.h"
+
+1701181237 c:\users\blase\documents\github\tp-final-lab-\tp final v2\listaempleados.h
+	"empleado.h"
+
+1701268004 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\practicas.c
+	"practicas.h"
+
+1701268004 c:\users\blase\documents\github\tp-final-lab-\tp final v2\practicas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

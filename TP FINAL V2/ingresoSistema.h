@@ -25,10 +25,10 @@ typedef struct
 
 void crearUsuarioPaciente(paciente paciente);
 void crearUsuarioEmpleado(empleados_laboratorio empleados);
-void cambiarContraseñaPacientes(char archivoP[30]);
-void cambiarContraseñaEmpleados(char archivoP[30]);
-int ingresarUsuarioPaciente();
-int ingresarUsuarioEmpleado();
+void cambiarContraseniaPacientes(char archivoP[30],UsuarioPaciente usuario);
+void cambiarContraseniaEmpleados(char archivoP[30],UsuarioEmpleado empleado);
+UsuarioPaciente ingresarUsuarioPaciente();
+UsuarioEmpleado ingresarUsuarioEmpleado();
 void menuPaciente();
 void menuEmpleado();
 void menu();
