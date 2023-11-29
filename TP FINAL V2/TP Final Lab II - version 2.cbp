@@ -31,10 +31,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="colores.h" />
 		<Unit filename="empleado.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="empleado.h" />
+		<Unit filename="gotoxy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="gotoxy.h" />
 		<Unit filename="listaEmpleados.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -42,10 +47,18 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="menuDios.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="menuDios.h" />
 		<Unit filename="paciente.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="paciente.h" />
+		<Unit filename="practicas.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="practicas.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

@@ -1,18 +1,18 @@
 # depslib dependency file v1.0
-1699031444 source:c:\users\usuario\desktop\tp final lab ii - version 2\empleado.c
+1700718082 source:c:\users\usuario\desktop\tp final lab ii - version 2\empleado.c
 	"empleado.h"
 
-1699031448 c:\users\usuario\desktop\tp final lab ii - version 2\empleado.h
+1700718082 c:\users\usuario\desktop\tp final lab ii - version 2\empleado.h
 	<stdlib.h>
 	<stdio.h>
 	<conio.h>
 	<string.h>
 	<ctype.h>
 
-1699031470 source:c:\users\usuario\desktop\tp final lab ii - version 2\listaempleados.c
+1700718082 source:c:\users\usuario\desktop\tp final lab ii - version 2\listaempleados.c
 	"listaEmpleados.h"
 
-1699031474 c:\users\usuario\desktop\tp final lab ii - version 2\listaempleados.h
+1700718082 c:\users\usuario\desktop\tp final lab ii - version 2\listaempleados.h
 	"empleado.h"
 
 1699032790 source:c:\users\usuario\desktop\tp final lab ii - version 2\pacientes.c
@@ -25,13 +25,13 @@
 	<conio.h>
 	<ctype.h>
 
-1699032675 source:c:\users\usuario\desktop\tp final lab ii - version 2\main.c
+1700760964 source:c:\users\usuario\desktop\tp final lab ii - version 2\main.c
 	<stdio.h>
 	<stdlib.h>
 	"empleado.h"
 	"listaEmpleados.h"
-	"Pacientes.h"
-	"arbol.h"
+	"paciente.h"
+	"practicas.h"
 
 1699032686 c:\users\usuario\desktop\tp final lab ii - version 2\arbol.h
 	<stdio.h>
@@ -104,38 +104,101 @@
 	<conio.h>
 	<ctype.h>
 
-1699041463 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\empleado.c
+1701168617 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\empleado.c
 	"empleado.h"
 
-1699020224 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\empleado.h
+1700743960 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\empleado.h
 	<stdlib.h>
 	<stdio.h>
 	<conio.h>
 	<string.h>
 	<ctype.h>
 
-1699020224 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\listaempleados.c
+1700743960 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\listaempleados.c
 	"listaEmpleados.h"
 
-1699020224 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\listaempleados.h
+1700743960 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\listaempleados.h
 	"empleado.h"
 
-1699055960 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\main.c
+1701219894 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\main.c
 	<stdio.h>
 	<stdlib.h>
 	"empleado.h"
 	"listaEmpleados.h"
 	"paciente.h"
+	"practicas.h"
+	"menuDios.h"
 
 1699045062 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\pacientes.c
 	"Pacientes.h"
 
-1699057703 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\paciente.h
+1701143151 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\paciente.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
 	<ctype.h>
+	"practicas.h"
 
-1699058212 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\paciente.c
+1701222651 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\paciente.c
 	"paciente.h"
+
+1700970125 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\practicas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1700970125 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\practicas.c
+	"practicas.h"
+
+1700760744 c:\users\usuario\desktop\tp final lab ii - version 2\paciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+	"practicas.h"
+
+1700760707 c:\users\usuario\desktop\tp final lab ii - version 2\practicas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1700757587 source:c:\users\usuario\desktop\tp final lab ii - version 2\paciente.c
+	"paciente.h"
+
+1700761027 source:c:\users\usuario\desktop\tp final lab ii - version 2\practicas.c
+	"practicas.h"
+
+1491400450 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1701166121 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\menudios.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<windows.h>
+	"colores.h"
+	"gotoxy.h"
+
+1491399896 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\gotoxy.h
+
+1610866462 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\colores.h
+
+1636933546 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1701169729 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\menudios.c
+	"menuDios.h"
 

@@ -1,5 +1,5 @@
 #include "listaEmpleados.h"
-#include "ingresoSistema.h"
+
 nodoListaEmpleados* inicListaEmpleados()
 {
     return NULL;

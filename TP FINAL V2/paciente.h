@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <ctype.h>
+#include "practicas.h"
 
 #ifndef PACIENTE_H_INCLUDED
 #define PACIENTE_H_INCLUDED
@@ -38,8 +39,7 @@ typedef struct nodoListaIngresos
 {
     ingresos datosIngresoPac;
     struct nodoListaIngresos *siguiente;
-    nodoListaPracXingreso *listaPracticasPorIngreso;
-
+    nodoListaPracXingreso* listaPracXing;
 }nodoListaIngresos;
 
 ///***************************************************///
@@ -60,19 +60,31 @@ typedef struct nodoarbol
     paciente dato;
     struct nodoarbol *izq;
     struct nodoarbol *der;
-    nodoListaIngresos *listaIngresosPac;
+    nodoListaIngresos* listaIng;
 }nodoarbol;
 
 ///***************************************************///
 
+///STRUCT AUXILIAR - LISTA PACIENTE
+typedef struct
+{
+    paciente datosPac;
+    struct nodoListaPaciente *siguiente;
+}nodoListaPaciente;
+
+///***************************************************///
+
 ///FUNCIONES - PACIENTES
-paciente cargaPaciente(nodoarbol* arbol , paciente nuevoPaciente);
+paciente cargaPaciente(char nombreArchivo[],paciente nuevoPaciente);
+void mostrarArchPacientes(char nombreArchivo[]);
 void mostrarPaciente(paciente persona);
+void cargaEnArchivo(char nombreArchivo[]);
+void guardaUnaPersona(char nombreArchivo[],paciente perso);
 
 ///FUNCIONES VALIDACIONES - PACIENTES
 int verificaNombre(char nombre[]);
 int verificaEdad(int edad);
-int verificaExistenciaPaciente(nodoarbol* arbol , char dniPaciente[]);
+int verificaExistenciaPaciente(char nombreArchivo[],char dniPaciente[]);
 int verificaDni(char dniP[]);
 int verificaDireccion(char direccion[]);
 int verificaTelefono(char telefono[]);
@@ -82,28 +94,57 @@ nodoarbol* inicArbol();
 nodoarbol* crearNodoArbol(paciente persona);
 nodoarbol *insertar(nodoarbol *arbol,paciente dato);
 void mostrarArbolInOrder(nodoarbol *arbol);
-nodoarbol* buscarPacienteArbol(nodoarbol* arbol , char dniPaciente[9]);
-nodoarbol* cargaArbolPacientes(nodoarbol* arbol);
+nodoarbol* buscarPacienteArbol(nodoarbol* arbol , char dniPaciente[]);
+nodoarbol* pasarArchPacienteToArbol(char nombreArchivo[] , nodoarbol* arbol);
 
-///FUNCIONES DE LISTA - INGRESOS
+///FUNCIONES DE LISTA - PACIENTES
+nodoListaPaciente* iniclistaPaciente();
+nodoListaPaciente* crearNodoPaciente(paciente pac);
+nodoListaPaciente* agregarInicioListaPaciente(nodoListaPaciente* listaPac , nodoListaPaciente* nuevoNodoPac);
+nodoListaPaciente* agregarEnOrdenListaPaciente(nodoListaPaciente* listaPac , nodoListaPaciente* nuevoNodoPac);
+void mostrarListaPaciente(nodoListaPaciente* listaPac);
+nodoListaPaciente* pasarArchPacToListaPac(char nombreArchivo[] , nodoListaPaciente* listaPac);
+
+///FUNCIONES DE ARCHIVOS INGRESOS - PACIENTES
+void guardarUnIngreso(char nombreArchivo[] , ingresos ingPac);
+int ultimoIngresoArch(char nombreArchivo[]);
+void mostrarUnIngreso(ingresos ingresoPaciente);
+void agregarIngreso(char nombreArchivo[] , nodoarbol* arbol);
+void mostrarArchIngresos(char nombreArchivo[]);
+
+///FUNCIONES DE LISTA INGRESOS - PACIENTES
 nodoListaIngresos* inicListaIngresos();
 nodoListaIngresos* crearNodoIngreso(ingresos ingresoPac);
 nodoListaIngresos* agregarEnOrdenListaIngresos(nodoListaIngresos* listaIngresos , nodoListaIngresos* nuevoNodoIngreso);
 void mostrarListaIngresos(nodoListaIngresos* listaIngresos);
+nodoListaIngresos* buscarIngresoPorNumIngreso(nodoListaIngresos* listaIng , int numIngreso);
+ingresos buscarIngresoPorDni(nodoListaIngresos* listaIng , char dniPac[]);
+nodoListaIngresos* pasarArchToListaIng(char nombreArchivo[] , nodoListaIngresos* listaIng);
 
-///FUNCIONES AUXILIARES - INGRESOS
-ingresos cargaDatosIngresos(nodoarbol *arbol , ingresos ingresoPaciente);
+///FUNCIONES AUXILIARES INGRESOS - PACIENTES
+ingresos cargaDatosIngresos(nodoarbol* arbol , ingresos ingresoPaciente);
 nodoListaIngresos* agregarInicioListaIngresos(nodoListaIngresos* listaIngresos , nodoListaIngresos* nuevoNodoIngreso);
-void mostrarUnaPracticaPorIngreso(practicaXingreso prac);
+void mostrarUnIngreso(ingresos ingresoPaciente);
 
-///FUNCIONES DE LISTA - PARACTICAS POR INGRESO
+///FUNCIONES DE LISTA - PARACTICAS POR INGRESO - PACIENTES
 nodoListaPracXingreso* inicListaPracPorIngreso();
 nodoListaPracXingreso* crearNodoPracPorIngreso(practicaXingreso prac);
 nodoListaPracXingreso* agregarEnOrdenListaPracPorIngreso(nodoListaPracXingreso* listaPracPorIngreso , nodoListaPracXingreso* nuevoNodoPracPorIngreso);
 void mostrarListaPracPorIngreso(nodoListaPracXingreso* listaPracPorIngreso);
 
-///FUNCIONES AUXILIARES - PARACTICAS POR INGRESO
+///FUNCIONES AUXILIARES - PARACTICAS POR INGRESO - PACIENTES
 nodoListaPracXingreso* agregarInicioListaPracPorIngreso(nodoListaPracXingreso* listaPracPorIngreso , nodoListaPracXingreso* nuevoNodoPracPorIngreso);
 void mostrarUnaPracticaPorIngreso(practicaXingreso prac);
+
+///FUNCIONES ARCHIVO - PRACTICAS POR INGRESO - PACIENTES
+practicaXingreso cargaDatosPracticaPorIngreso(practicaXingreso pracPorIng , nodoListaPracticas* listaPrac , nodoListaIngresos* listaIng);
+void guardarUnaPracticaPorIngreso(char nombreArchivo[] , practicaXingreso pracXing);
+void mostrarArchPracticasPorIngreso(char nombreArchivo[]);
+void agregarPracticasPorIngreso(char nombreArchivo[] , nodoListaIngresos* listaIng, nodoListaPracticas* listaPrac);
+
+///FUNCIONES ADL
+nodoarbol* altaAdl(nodoarbol* adl , paciente pac , ingresos ingPac);
+void mostrarAdlPacientes(nodoarbol* adl);
+nodoarbol* cargaAdlPacientes(char nombreArchPac[] , nodoarbol* adl , char nombreArchIng[]);
 
 #endif // PACIENTE_H_INCLUDED
