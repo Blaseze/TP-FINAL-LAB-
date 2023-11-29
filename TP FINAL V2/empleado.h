@@ -17,7 +17,16 @@ typedef struct
     int estado;
 }empleados_laboratorio;
 
+typedef struct
+{
+    char usuarioEmpleado[10];
+    char contraEmpleado[10];
+     int nivel;
+}UsuarioEmpleado;
+
 ///FUNCIONES PRINCIPALES
+void crearUsuarioEmpleado(empleados_laboratorio empleados);
+void cambiarContraseniaEmpleados(char archivoP[30],UsuarioEmpleado empleado);
 void cargarArchEmpleados(char nombreArchivo[]);
 void guardarUnEmpleado(char nombreArchivo[] , empleados_laboratorio emple);
 void mostrarArchEmpleados(char nombreArchivo[]);

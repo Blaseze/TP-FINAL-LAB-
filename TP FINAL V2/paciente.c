@@ -1,5 +1,65 @@
 #include "paciente.h"
 
+/// ---------------------------- FUNCIONES CREACION USUARIO --------------------------------------- ///
+void crearUsuarioPaciente(paciente pacienteUsu)
+{
+    UsuarioPaciente usuarioP;
+    FILE* archiUsuarios=fopen("UsuariosPacientes.dat","ab");
+
+
+    if(archiUsuarios)
+    {
+        strcpy(usuarioP.dniPaciente,pacienteUsu.dni);
+        strcpy(usuarioP.contrasenia,pacienteUsu.dni);
+        fwrite(&usuarioP,sizeof(UsuarioPaciente),1,archiUsuarios);
+        usuarioP.nivel=0;
+        fclose(archiUsuarios);
+    }
+}
+void cambiarContraseniaPacientes(char archivoP[30], UsuarioPaciente usuario)
+{
+    UsuarioPaciente registro;
+    int i=0;
+    int j=3;
+    char comprobacion[10];
+    int flag=0;
+    FILE*archi=fopen(archivoP,"r+b");
+    if(archi)
+    {
+        while ((fread(&registro,sizeof(UsuarioPaciente),1,archi)) && flag==0)
+        {
+            while(!feof(archi) && usuario.dniPaciente==registro.dniPaciente && j>0)
+            {
+                printf("Ingrese nueva contrasenia:\n");
+                fflush(stdin);
+                gets(usuario.contrasenia);
+                printf("Ingrese nuevamente la contrasenia:\n");
+                fflush(stdin);
+                gets(comprobacion);
+                if(strcmp(usuario.contrasenia,comprobacion)==0)
+                {
+                    flag=1;
+                    fseek(archi,sizeof(UsuarioPaciente)*(i-1),SEEK_SET);
+                    strcpy(registro.contrasenia,usuario.contrasenia);
+                    fwrite(&registro,sizeof(UsuarioPaciente),1,archi);
+                }
+                else
+                {
+                    printf("Las contrasenias no coinciden, vuelva a intentarlo\n");
+                    j--;
+                    if(j==0)
+                    {
+                        printf("Realizaste demasiados intentos\n");
+                        break;
+                    }
+                }
+            }
+            i++;
+        }
+        fclose(archi);
+    }
+}
+
 /// ---------------------------- FUNCIONES PACIENTE ----------------------------------------------- ///
 int verificaNombre(char nombre[])
 {
@@ -277,7 +337,7 @@ paciente cargaPaciente(char nombreArchivo[],paciente nuevoPaciente)
         }
 
     }
-
+    crearUsuarioPaciente(nuevoPaciente);
     nuevoPaciente.eliminados=0;
 
     return nuevoPaciente;
@@ -469,11 +529,14 @@ nodoarbol* eliminar_nodo_de_arbol (nodoarbol* arbol, char dni[8])
                 {
 
                 if (arbol->der)
+                {
+
+
 
                     nodoarbol* basura = tomar_nodo_menor_valor(arbol->der);
 
 
-                    arbol->der = eliminar_nodo_de_arbol(arbol->der, arbol->dato);
+                    arbol->der = eliminar_nodo_de_arbol(arbol->der, arbol->dato.dni);
 
 
                     free(basura);
@@ -498,7 +561,7 @@ nodoarbol* eliminar_nodo_de_arbol (nodoarbol* arbol, char dni[8])
 
                 arbol->der = eliminar_nodo_de_arbol(arbol->der, dni);
                 }
-            /
+
             else
                 {
 
@@ -1344,7 +1407,7 @@ void mostrarEstudioPaciente(nodoarbol* arbol,UsuarioPaciente usuario)
             {
                 while(aux->listaIng->listaPracXing)
                 {
-                    mostrarUnaPractica(aux->listaIng->listaPracXing->datos);
+                    mostrarUnaPracticaPorIngreso(aux->listaIng->listaPracXing->datos);
                     aux->listaIng->listaPracXing=aux->listaIng->listaPracXing->siguiente;
                 }
             }
@@ -1354,7 +1417,7 @@ void mostrarEstudioPaciente(nodoarbol* arbol,UsuarioPaciente usuario)
         else
         {
             printf("Numero de practica incorrecto.\nSaliendo del sistema.\n");
-            return break;
+
         }
     }
 }

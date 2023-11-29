@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <ctype.h>
-#include "ingresoSistema.h"
-#include "practicas.h"
 
+#include "practicas.h"
+#include "ingresoSistema.h"
 
 #ifndef PACIENTE_H_INCLUDED
 #define PACIENTE_H_INCLUDED
 
 ///STRUCT PRÁCTICA POR INGRESO Y LISTA PRÁCTICA POR INGRESO
+
 typedef struct
 {
     int nroIngreso;
@@ -65,6 +66,7 @@ typedef struct nodoarbol
     nodoListaIngresos* listaIng;
 }nodoarbol;
 
+
 ///***************************************************///
 
 ///STRUCT AUXILIAR - LISTA PACIENTE
@@ -75,7 +77,23 @@ typedef struct
 }nodoListaPaciente;
 
 ///***************************************************///
+///***************************************************///
 
+///STRUCT CREACION USUARIOS
+typedef struct
+{
+    char dniPaciente[30];
+    char contrasenia[10];
+    int nivel;
+
+}UsuarioPaciente;
+
+
+///***************************************************///
+
+///  FUNCIONES CREACION USUARIO
+void crearUsuarioPaciente(paciente pacienteUsu);
+void cambiarContraseniaPacientes(char archivoP[30],UsuarioPaciente usuario);
 ///FUNCIONES - PACIENTES
 paciente cargaPaciente(char nombreArchivo[],paciente nuevoPaciente);
 void mostrarArchPacientes(char nombreArchivo[]);

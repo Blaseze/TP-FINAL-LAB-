@@ -1,5 +1,74 @@
 #include "empleado.h"
 
+void crearUsuarioEmpleado(empleados_laboratorio empleados)
+{
+    UsuarioEmpleado aux;
+    FILE* archiEmpleados=fopen("UsuariosEmpleados.dat","ab");
+
+
+    if(archiEmpleados)
+    {
+        if(strcmpy(empleados.perfil,"administrativo")==0)
+        {
+            strcpy(aux.usuarioEmpleado,empleados.dni);
+            strcpy(aux.contraEmpleado,empleados.passEmpleado);
+            aux.nivel=1;
+            fwrite(&aux,sizeof(UsuarioEmpleado),1,archiEmpleados);
+        }
+        else
+        {
+            strcpy(aux.usuarioEmpleado,empleados.dni);
+            strcpy(aux.contraEmpleado,empleados.passEmpleado);
+            aux.nivel=2;
+            fwrite(&aux,sizeof(UsuarioEmpleado),1,archiEmpleados);
+        }
+
+        fclose(archiEmpleados);
+    }
+}
+void cambiarContraseniaEmpleados(char archivoP[30],UsuarioEmpleado empleado)///archivo de empleados
+{
+    UsuarioEmpleado registro;
+    int i=0;
+    int j=3;
+    char comprobacion[10];
+    int flag=0;
+    FILE*archi=fopen(archivoP,"r+b");
+    if(archi)
+    {
+        while ((fread(&registro,sizeof(UsuarioEmpleado),1,archi)) && flag==0)
+        {
+            while(!feof(archi) && registro.usuarioEmpleado==empleado.usuarioEmpleado && j>0)
+            {
+                printf("Ingrese nueva contrasenia:\n");
+                fflush(stdin);
+                gets(empleado.contraEmpleado);
+                printf("Ingrese nuevamente contrasenia:\n");
+                fflush(stdin);
+                gets(comprobacion);
+                if(strcmp(empleado.contraEmpleado,comprobacion)==0)
+                {
+                    flag=1;
+                    fseek(archi,sizeof(UsuarioEmpleado)*(i-1),SEEK_SET);
+                    strcpy(registro.contraEmpleado,empleado.contraEmpleado);
+                    fwrite(&registro,sizeof(UsuarioEmpleado),1,archi);
+                }
+                else
+                {
+                    printf("Las contrasenias no coinciden, vuelva a intentarlo\n");
+                    j--;
+                    if(j==0)
+                    {
+                        printf("Realizaste demasiados intentos\n");
+                    }
+                }
+            }
+            i++;
+        }
+        fclose(archi);
+    }
+
+}
 void cargarArchEmpleados(char nombreArchivo[])
 {
     empleados_laboratorio emple;
