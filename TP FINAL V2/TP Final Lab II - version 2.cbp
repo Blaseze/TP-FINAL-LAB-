@@ -40,6 +40,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="gotoxy.h" />
+		<Unit filename="ingresoSistema.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ingresoSistema.h" />
 		<Unit filename="listaEmpleados.c">
 			<Option compilerVar="CC" />
 		</Unit>

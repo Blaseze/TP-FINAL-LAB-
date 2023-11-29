@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <ctype.h>
-#include "practicas.h"
 #include "ingresoSistema.h"
+#include "practicas.h"
+
 
 #ifndef PACIENTE_H_INCLUDED
 #define PACIENTE_H_INCLUDED
@@ -149,6 +150,6 @@ void mostrarAdlPacientes(nodoarbol* adl);
 nodoarbol* cargaAdlPacientes(char nombreArchPac[] , nodoarbol* adl , char nombreArchIng[]);
 
 ///FUNCIONES MENU
-void mostrarEstudioPaciente(nodoarbol* arbol,UsuarioPaciente usuario);
+void mostrarEstudioPaciente(nodoarbol* arbol, UsuarioPaciente usuario);
 
 #endif // PACIENTE_H_INCLUDED
