@@ -4,109 +4,46 @@
 void crearUsuarioPaciente(paciente pacienteUsu)
 {
     UsuarioPaciente usuarioP;
-    FILE* archiUsuarios=fopen("UsuariosPacientes.dat","ab");
+    FILE* archiUsuarios=fopen("UsuariosPacientes.txt","a+");
 
 
     if(archiUsuarios)
     {
         strcpy(usuarioP.usuarioPaciente,pacienteUsu.dni);
         strcpy(usuarioP.contrasenia,pacienteUsu.dni);
-        fwrite(&usuarioP,sizeof(UsuarioPaciente),1,archiUsuarios);
-        usuarioP.nivel=0;
+        usuarioP.nivel=0;//dejo el inicio en 0 aunque me llene con basura
+    fwrite(&usuarioP,sizeof(UsuarioPaciente),1,archiUsuarios);
+
         fclose(archiUsuarios);
     }
 }
-//void cambiarContraseniaPacientes(char archivoUsuPaciente[30],char archivoPaciente[30] UsuarioPaciente usuario)
-//{
-//    UsuarioPaciente registro;
-//    int i=0;
-//    int j=3;
-//    char comprobacion[10];
-//    int flag=0;
-//    FILE*archi=fopen(archivoP,"r+b");
-//    if(archi)
-//    {
-//        while ((fread(&registro,sizeof(UsuarioPaciente),1,archi)) && flag==0)
-//        {
-//            while(!feof(archi) && usuario.dniPaciente==registro.dniPaciente && j>0)
-//            {
-//                printf("Ingrese nueva contrasenia:\n");
-//                fflush(stdin);
-//                gets(usuario.contrasenia);
-//                printf("Ingrese nuevamente la contrasenia:\n");
-//                fflush(stdin);
-//                gets(comprobacion);
-//                if(strcmp(usuario.contrasenia,comprobacion)==0)
-//                {
-//                    flag=1;
-//                    fseek(archi,sizeof(UsuarioPaciente)*(i-1),SEEK_SET);
-//                    strcpy(registro.contrasenia,usuario.contrasenia);
-//                    fwrite(&registro,sizeof(UsuarioPaciente),1,archi);
-//                }
-//                else
-//                {
-//                    printf("Las contrasenias no coinciden, vuelva a intentarlo\n");
-//                    j--;
-//                    if(j==0)
-//                    {
-//                        printf("Realizaste demasiados intentos\n");
-//                        break;
-//                    }
-//                }
-//            }
-//            i++;
-//        }
-//        fclose(archi);
-//    }
-//}
-void cambiarContraseniaPacientes(char archivoUsuPaciente[30], char archivoPaciente[30], UsuarioPaciente paciente)
+void cambiarContraseniaPacientes(char archivoUsuPaciente[30], UsuarioPaciente usuPaciente)
 {
-    UsuarioPaciente registroUsuaPaciente;
-    paciente registroPaciente;
+    UsuarioPaciente registroPaciente;
 
-    FILE *archiUsuaPaciente = fopen(archivoUsuPaciente, "r+b");
-    FILE *archiPaciente = fopen(archivoPaciente, "r+b");
+    FILE *archiUsuaPaciente = fopen(archivoUsuPaciente, "r+");
 
-    if ((archiUsuaPaciente != NULL) && (archiPaciente != NULL))
+    if (archiUsuaPaciente != NULL)
     {
         char comprobacion[8];
-        while (fread(&registroUsuaPaciente, sizeof(UsuarioPaciente), 1, archiUsuaPaciente))
+        while (fread(&registroPaciente, sizeof(UsuarioPaciente), 1, archiUsuaPaciente))
         {
-            if (strcmp(registroUsuaPaciente.usuarioPaciente, paciente.usuarioPaciente) == 0)
+            if (strcmp(registroPaciente.usuarioPaciente, usuPaciente.usuarioPaciente) == 0)
             {
                 printf("Ingrese nueva contrasenia:\n");
                 fflush(stdin);
-                gets(paciente.contrasenia);
+                gets(usuPaciente.contrasenia);
                 printf("Ingrese nuevamente contrasenia:\n");
                 fflush(stdin);
                 gets(comprobacion);
 
-                if (strcmp(paciente.contrasenia, comprobacion) == 0)
+                if (strcmp(usuPaciente.contrasenia, comprobacion) == 0)
                 {
                     // Actualizar en archiUsuaPaciente
                     fseek(archiUsuaPaciente, -sizeof(UsuarioPaciente), SEEK_CUR);
-                    fwrite(&paciente, sizeof(UsuarioPaciente), 1, archiUsuaPaciente);
+                    fwrite(&usuPaciente, sizeof(UsuarioPaciente), 1, archiUsuaPaciente);
 
-                    // Actualizar en archiPaciente
-                    rewind(archiPaciente);
-
-                    FILE *tempFile = fopen("tempfile", "w+b");  // Archivo temporal para escribir los datos actualizados
-
-                    while (fread(&registroPaciente, sizeof(paciente), 1, archiPaciente))
-                    {
-                        if (strcmp(registroPaciente.userEmpleado, paciente.usuarioPaciente) == 0)
-                        {
-                            strcpy(registroPaciente.passEmpleado, paciente.contrasenia);
-                        }
-
-                        fwrite(&registroPaciente, sizeof(paciente), 1, tempFile);
-                    }
-
-                    fclose(archiPaciente);
-                    fclose(tempFile);
-
-                    remove(archivoPaciente);  // Eliminar el archivo antiguo
-                    rename("tempfile", archivoPaciente);  // Renombrar el archivo temporal
+                    printf("Contrasenia actualizada exitosamente.\n");
 
                     break;  // Salir del bucle después de encontrar y actualizar el registro
                 }
@@ -122,7 +59,7 @@ void cambiarContraseniaPacientes(char archivoUsuPaciente[30], char archivoPacien
     }
     else
     {
-        printf("No se pudieron abrir los archivos\n");
+        printf("No se pudo abrir el archivo de usuarios de pacientes.\n");
     }
 }
 /// ---------------------------- FUNCIONES PACIENTE ----------------------------------------------- ///
@@ -169,7 +106,7 @@ int verificaExistenciaPaciente(char nombreArchivo[],char dniPaciente[])
 {
     int existe=0;
     paciente auxPaciente;
-    FILE *archi= fopen(nombreArchivo,"rb");
+    FILE *archi= fopen(nombreArchivo,"r+");
 
     if(archi)
     {
@@ -264,7 +201,7 @@ void cargaEnArchivo(char nombreArchivo[])
 
     while(continuar=='s'|| continuar=='S')
     {
-        persona=cargaPaciente(nombreArchivo,persona);
+        persona=cargaPaciente(nombreArchivo);
         guardaUnaPersona(nombreArchivo,persona);
 
         printf("\n %cDesea cargar otro paciente? S/N ", 168);
@@ -276,7 +213,7 @@ void cargaEnArchivo(char nombreArchivo[])
 
 void guardaUnaPersona(char nombreArchivo[],paciente perso)
 {
-    FILE *archi=fopen(nombreArchivo,"ab");
+    FILE *archi=fopen(nombreArchivo,"a+");
 
     if(archi!= NULL)
     {
@@ -289,8 +226,9 @@ void guardaUnaPersona(char nombreArchivo[],paciente perso)
     }
 }
 
-paciente cargaPaciente(char nombreArchivo[],paciente nuevoPaciente)
+paciente cargaPaciente(char nombreArchivo[])
 {
+    paciente nuevoPaciente;
     int nombreOk=0;
     int edadOk=0;
     char entradaEdad[11];
@@ -402,8 +340,9 @@ paciente cargaPaciente(char nombreArchivo[],paciente nuevoPaciente)
         }
 
     }
-    crearUsuarioPaciente(nuevoPaciente);
+
     nuevoPaciente.eliminados=0;
+    crearUsuarioPaciente(nuevoPaciente);
 
     return nuevoPaciente;
 }
@@ -423,7 +362,7 @@ void mostrarPaciente(paciente persona)
 void mostrarArchPacientes(char nombreArchivo[])
 {
     paciente aux;
-    FILE *archi=fopen(nombreArchivo,"rb");
+    FILE *archi=fopen(nombreArchivo,"r");
 
     if(archi)
     {
@@ -518,7 +457,7 @@ nodoarbol* buscarPacienteArbol(nodoarbol* arbol, char dniPaciente[])
 nodoarbol* pasarArchPacienteToArbol(char nombreArchivo[], nodoarbol* arbol)
 {
     paciente auxReg;
-    FILE *pArchivo = fopen(nombreArchivo, "rb");
+    FILE *pArchivo = fopen(nombreArchivo, "r");
 
     if(pArchivo != NULL)
     {
@@ -719,7 +658,7 @@ void mostrarListaPaciente(nodoListaPaciente* listaPac)
 nodoListaPaciente* pasarArchPacToListaPac(char nombreArchivo[], nodoListaPaciente* listaPac)
 {
     paciente auxRegPac;
-    FILE *pArchivo = fopen(nombreArchivo, "rb");
+    FILE *pArchivo = fopen(nombreArchivo, "r");
 
     if(pArchivo != NULL)
     {
@@ -744,6 +683,8 @@ ingresos cargaDatosIngresos(nodoarbol* arbol, ingresos ingresoPaciente)
     int fechaRetiroValida = 0;
     nodoarbol* encontrado;
     int matriculaValida = 0;
+    nodoListaPracticas*aux=arbol->listaIng->listaPrac;
+    practicas auxPracticas;
 
     while(fechaIngresoValida != 1)
     {
@@ -824,6 +765,11 @@ ingresos cargaDatosIngresos(nodoarbol* arbol, ingresos ingresoPaciente)
     }
 
     ingresoPaciente.eliminado = 0;
+
+
+    auxPracticas=cargaDatosPrac(auxPracticas);
+    nodoListaPracticas*nuevaPractica=crearNodoPractica(auxPracticas);
+    aux=agregarEnOrdenListaPracticas(aux,nuevaPractica);
 
     return ingresoPaciente;
 }
@@ -970,7 +916,7 @@ void agregarIngreso(char nombreArchivo[], nodoarbol* arbol)
         ingPaciente = cargaDatosIngresos(arbol, ingPaciente);
         guardarUnIngreso(nombreArchivo, ingPaciente);
 
-        printf("\n %cQuires agregar otro ingreso? s=SI / n=NO ", 168);
+        printf("\n %cQuires agregar otro ingreso? s=SI / n=NO \n", 168);
         fflush(stdin);
         continuar = getch();
     }
@@ -978,7 +924,7 @@ void agregarIngreso(char nombreArchivo[], nodoarbol* arbol)
 
 void guardarUnIngreso(char nombreArchivo[], ingresos ingPac)
 {
-    FILE* pArchivo = fopen(nombreArchivo, "ab");
+    FILE* pArchivo = fopen(nombreArchivo, "a+");
 
     if(pArchivo != NULL)
     {
@@ -994,7 +940,7 @@ void guardarUnIngreso(char nombreArchivo[], ingresos ingPac)
 void mostrarArchIngresos(char nombreArchivo[])
 {
     ingresos ingPac;
-    FILE *pArchivo = fopen(nombreArchivo, "rb");
+    FILE *pArchivo = fopen(nombreArchivo, "r");
 
     if(pArchivo != NULL)
     {
@@ -1014,7 +960,7 @@ int ultimoIngresoArch(char nombreArchivo[])
 {
     ingresos auxRegIng;
     int ultimoIng = 0;
-    FILE *pArchivo = fopen(nombreArchivo, "rb");
+    FILE *pArchivo = fopen(nombreArchivo, "r");
 
     if(pArchivo != NULL)
     {
@@ -1046,7 +992,7 @@ nodoListaIngresos* crearNodoIngreso(ingresos ingresoPac)
 
     auxNodoIngreso->datosIngresoPac = ingresoPac;
     auxNodoIngreso->siguiente = NULL;
-    auxNodoIngreso->listaPracXing = inicListaPracPorIngreso();
+    auxNodoIngreso->listaPrac = inicListaPracticas();
 
     return auxNodoIngreso;
 }
@@ -1162,7 +1108,7 @@ ingresos buscarIngresoPorDni(nodoListaIngresos* listaIng, char dniPac[])
 nodoListaIngresos* pasarArchToListaIng(char nombreArchivo[], nodoListaIngresos* listaIng)
 {
     ingresos auxRegIng;
-    FILE *pArchivo = fopen(nombreArchivo, "rb");
+    FILE *pArchivo = fopen(nombreArchivo, "r");
 
     if(pArchivo != NULL)
     {
@@ -1337,7 +1283,7 @@ practicaXingreso cargaDatosPracticaPorIngreso(practicaXingreso pracPorIng, nodoL
 void guardarUnaPracticaPorIngreso(char nombreArchivo[], practicaXingreso pracXing)
 {
     practicaXingreso auxRegPracXing;
-    FILE *pArchivo = fopen(nombreArchivo,"ab");
+    FILE *pArchivo = fopen(nombreArchivo,"a+");
 
     if(pArchivo != NULL)
     {
@@ -1353,7 +1299,7 @@ void guardarUnaPracticaPorIngreso(char nombreArchivo[], practicaXingreso pracXin
 void mostrarArchPracticasPorIngreso(char nombreArchivo[])
 {
     practicaXingreso auxPracXing;
-    FILE *pArchivo = fopen(nombreArchivo, "rb");
+    FILE *pArchivo = fopen(nombreArchivo, "r");
 
     if(pArchivo != NULL)
     {
@@ -1424,8 +1370,8 @@ nodoarbol* cargaAdlPacientes(char nombreArchPac[], nodoarbol* adl, char nombreAr
     paciente auxRegPac;
     ingresos auxRegIng;
 
-    FILE* pArchivoPac = fopen(nombreArchPac, "rb");
-    FILE* pArchivoIng = fopen(nombreArchIng, "rb");
+    FILE* pArchivoPac = fopen(nombreArchPac, "r");
+    FILE* pArchivoIng = fopen(nombreArchIng, "r");
 
     if((pArchivoPac != NULL) && (pArchivoIng != NULL))
     {
@@ -1447,42 +1393,44 @@ nodoarbol* cargaAdlPacientes(char nombreArchPac[], nodoarbol* adl, char nombreAr
 
 /// -------------------------------------- FIN FUNCIONES ADL ------------------------------------ ///
 /// Funciones extrasssssssssss
-void mostrarEstudioPaciente(nodoarbol* arbol,UsuarioPaciente usuario)
+void mostrarEstudioPaciente(nodoarbol* arbol, UsuarioPaciente usuario)
 {
-    arbol=buscarPacienteArbol(arbol,usuario.dniPaciente);
-    if(arbol)
+    arbol = buscarPacienteArbol(arbol, usuario.usuarioPaciente);
+
+    if (arbol)
     {
-     nodoarbol* aux=arbol;
-     int cantPracticas=1;
-      while(arbol->listaIng)
+        nodoListaIngresos* aux = arbol->listaIng;
+
+
+        while (aux)
         {
-            mostrarUnIngreso(arbol->listaIng->datosIngresoPac);
-            cantPracticas++;
-            arbol->listaIng= arbol->listaIng->siguiente;
+            mostrarUnIngreso(aux->datosIngresoPac);
+            aux=aux->siguiente;
         }
-        int i=0;
+
+        int i = 0;
         printf("Ponga el numero del ingreso que desea ver.\n");
         fflush(stdin);
-        scanf("%i",&i);
-        if(i>0 && i<=cantPracticas)
+        scanf("%i", &i);
+
+        // Restaurar el puntero al comienzo de la lista de ingresos
+        aux = arbol->listaIng;
+
+        while (aux)
         {
-        while(aux->listaIng)
-        {
-            if(aux->listaIng->datosIngresoPac.nroIngreso==i)
+            if (aux->datosIngresoPac.nroIngreso == i)
             {
-                while(aux->listaIng->listaPracXing)
+                while (aux->listaPrac)
                 {
-                    mostrarUnaPracticaPorIngreso(aux->listaIng->listaPracXing->datos);
-                    aux->listaIng->listaPracXing=aux->listaIng->listaPracXing->siguiente;
+                    mostrarUnaPractica(aux->listaPrac->datosPracticas);
+                    aux->listaPrac = aux->listaPrac->siguiente;
                 }
             }
-            aux->listaIng=aux->listaIng->siguiente;
+            arbol->listaIng = arbol->listaIng->siguiente;
         }
-        }
-        else
-        {
-            printf("Numero de practica incorrecto.\nSaliendo del sistema.\n");
-
-        }
+    }
+    else
+    {
+        printf("Numero de practica incorrecto.\nSaliendo del sistema.\n");
     }
 }

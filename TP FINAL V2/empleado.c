@@ -31,12 +31,14 @@ void cambiarContraseniaEmpleados(char archivoUsu[30], char archivoEmple[30], Usu
 {
     UsuarioEmpleado registroUsu;
     empleados_laboratorio registroEmple;
-
+ char comprobacion[8];
     FILE *archiUsua = fopen(archivoUsu, "r+b");
     FILE *archiEmpledo = fopen(archivoEmple, "r+b");
 
     if ((archiUsua != NULL) && (archiEmpledo != NULL))
-    {char comprobacion[8];
+    {
+        int usuarioEncontrado = 0;  // Variable para indicar si se encontró el usuario
+
         while (fread(&registroUsu, sizeof(UsuarioEmpleado), 1, archiUsua))
         {
             if (strcmp(registroUsu.usuarioEmpleado, empleado.usuarioEmpleado) == 0)
@@ -46,52 +48,57 @@ void cambiarContraseniaEmpleados(char archivoUsu[30], char archivoEmple[30], Usu
                 gets(empleado.contraEmpleado);
                 printf("Ingrese nuevamente contrasenia:\n");
                 fflush(stdin);
+
                 gets(comprobacion);
 
+                // Verifica que las contraseñas coincidan
                 if (strcmp(empleado.contraEmpleado, comprobacion) == 0)
                 {
                     // Actualizar en archiUsua
                     fseek(archiUsua, -sizeof(UsuarioEmpleado), SEEK_CUR);
                     fwrite(&empleado, sizeof(UsuarioEmpleado), 1, archiUsua);
 
-                    // Actualizar en archiEmpledo
-                    rewind(archiEmpledo);
+                    usuarioEncontrado = 1;  // Marcar que se encontró el usuario
 
-                    FILE *tempFile = fopen("tempfile", "w+b");  // Archivo temporal para escribir los datos actualizados
-
-                    while (fread(&registroEmple, sizeof(empleados_laboratorio), 1, archiEmpledo))
-                    {
-                        if (strcmp(registroEmple.userEmpleado, empleado.usuarioEmpleado) == 0)
-                        {
-                            strcpy(registroEmple.passEmpleado, empleado.contraEmpleado);
-                        }
-
-                        fwrite(&registroEmple, sizeof(empleados_laboratorio), 1, tempFile);
-                    }
-
-                    fclose(archiEmpledo);
-                    fclose(tempFile);
-
-                    remove(archivoEmple);  // Eliminar el archivo antiguo
-                    rename("tempfile", archivoEmple);  // Renombrar el archivo temporal
-
-                    break;  // Salir del bucle después de encontrar y actualizar el registro
+                    // No salimos del bucle aquí para seguir con la actualización del archivo de empleados
                 }
                 else
                 {
                     printf("Las contrasenias no coinciden, vuelva a intentarlo\n");
-                    break;
+                    break;  // Si las contraseñas no coinciden, salimos del bucle
                 }
             }
         }
 
+        if (usuarioEncontrado==1)
+        {
+            // Actualizar en archiEmpledo
+            rewind(archiEmpledo);
+
+            while (fread(&registroEmple, sizeof(empleados_laboratorio), 1, archiEmpledo))
+            {
+                if (strcmp(registroEmple.userEmpleado, empleado.usuarioEmpleado) == 0)
+                {
+
+                    fseek(archiEmpledo, -sizeof(empleados_laboratorio), SEEK_CUR);
+                     strcpy(registroEmple.passEmpleado,empleado.contraEmpleado);
+                    fwrite(&registroEmple, sizeof(empleados_laboratorio), 1, archiEmpledo);
+                    break;  // Salir del bucle después de encontrar y actualizar el registro
+                }
+            }
+
+            printf("Contraseña actualizada exitosamente.\n");
+        }
+
         fclose(archiUsua);
+        fclose(archiEmpledo);
     }
     else
     {
         printf("No se pudieron abrir los archivos\n");
     }
 }
+
 void cargarArchEmpleados(char nombreArchivo[])
 {
     empleados_laboratorio emple;
@@ -351,7 +358,8 @@ void mostrarUnEmpleado(empleados_laboratorio emple)
     printf(" Apellido y nombre..........: %s \n", emple.apeYnombre);
     printf(" DNI........................: %s \n", emple.dni);
     printf(" Usuario....................: %s \n", emple.userEmpleado);
-    printf(" Password...................: %s \n", emple.passEmpleado);
+   // printf(" Password...................: %s \n", emple.passEmpleado);
+    printf(" Password...................:********\n");
     printf(" Perfil.....................: %s \n", emple.perfil);
 
     if(emple.estado == 1)

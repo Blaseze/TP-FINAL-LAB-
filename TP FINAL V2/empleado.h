@@ -19,9 +19,10 @@ typedef struct
 
 typedef struct
 {
-    char usuarioEmpleado[10];
-    char contraEmpleado[10];
+    char usuarioEmpleado[8];
+    char contraEmpleado[8];
     int nivel;
+
 }UsuarioEmpleado;
 
 ///FUNCIONES PRINCIPALES

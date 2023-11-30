@@ -11,16 +11,18 @@ UsuarioPaciente ingresarUsuarioPaciente()
 {
     UsuarioPaciente usuarioP;
     UsuarioPaciente aux;
-    int i=5;
-    FILE*archi=fopen("UsuariosPacientes.txt","r+b");
+    int i=3;
+    FILE*archi=fopen("UsuariosPacientes.txt","r");
     int flag = 0;
     char dni[8];
 
     if(archi)
     {
+
         while(flag == 0 && i >=0 && i<=3)
         {
-            printf("INICIO DE SESION\n ");
+
+            printf("INICIO DE SESION PACIENTE\n ");
             printf("-------------------------\n ");
             printf("USUARIO: ");
             fflush(stdin);
@@ -33,10 +35,11 @@ UsuarioPaciente ingresarUsuarioPaciente()
 
             while(fread(&usuarioP,sizeof(UsuarioPaciente),1,archi))
             {
-                if(strcmp(aux.usuarioPaciente,usuarioP.usuarioPaciente) == 0 && strcmp(aux.contrasenia,usuarioP.contrasenia))
+                if(strcmp(aux.usuarioPaciente,usuarioP.usuarioPaciente) == 0 && strcmp(aux.contrasenia,usuarioP.contrasenia)==0)
                 {
 
                     flag = 1;
+
                     break;
 
                 }
@@ -47,6 +50,7 @@ UsuarioPaciente ingresarUsuarioPaciente()
                 printf("LA CONTRASENIA O EL USUARIO ES INVALIDO, INTENTE DE NUEVO...\n");
                 flag = 0;
                 i--;
+                rewind(archi);
             }
         }
         fclose(archi);
@@ -69,14 +73,14 @@ UsuarioEmpleado ingresarUsuarioEmpleado()
     UsuarioEmpleado aux;
     UsuarioEmpleado usuarioE;
     int i = 3;
-    FILE *archi = fopen("UsuariosEmpleados.txt", "rb");
+    FILE *archi = fopen("UsuariosEmpleados.txt", "r");
     int flag = 0;
 
     if (archi)
     {
         while (i > 0 && flag == 0)
         {
-            printf("INICIO DE SESION\n ");
+            printf("INICIO DE SESION EMPLEADO\n ");
             printf("-------------------------\n ");
             printf("USUARIO: ");
             fflush(stdin);
@@ -118,34 +122,34 @@ UsuarioEmpleado ingresarUsuarioEmpleado()
         exit(EXIT_FAILURE);
     }
 }
-void menuPaciente()
+void menuPaciente(nodoarbol*arbol)
 {
-    UsuarioPaciente usuario = ingresarUsuarioPaciente();
-    int eleccion = 0;
+
+    UsuarioPaciente usuario=ingresarUsuarioPaciente();
+    int eleccion=0;
 
     do
     {
-        if (usuario.nivel==0)
+        if(usuario.nivel !=0)
         {
-            printf("1: VER ESTUDIOS\n");
-            printf("2: CAMBIAR CONTRASENIA\n");
-            printf("3: SALIR\n");
+            system("cls");
+            printf("MENU PACIENTE.-\n");
+            printf("1:VER INGRESOS.-\n");
+            printf("2:CAMBIAR CONTRASENIA.-\n");
+            printf("3:SALIR.-\n");
+            printf("Seleccione la opcion que desea utilizar.\n");
             fflush(stdin);
-            scanf("%i", &eleccion);
-
-            switch (eleccion)
+            scanf("%i",&eleccion);
+            switch(eleccion)
             {
-//            case 1:
-//                mostrarEstudioPaciente(arbol, usuario);
-
-//                break;
+            case 1:
+                mostrarEstudioPaciente(arbol,usuario);
+                break;
             case 2:
-                //cambiarContraseniaPacientes("UsuariosPacientes.txt", char archivoPaciente[30],usuario)
+                cambiarContraseniaPacientes("UsuariosPacientes.txt",usuario);
                 break;
             case 3:
                 break;
-            default:
-                printf("Opción no válida. Intente de nuevo.\n");
             }
         }
         else
@@ -153,26 +157,27 @@ void menuPaciente()
             printf("Error al ingresar el usuario.\n");
             break;
         }
-    }
-    while (eleccion != 3);
+    }while(eleccion !=3);
 }
-void menuEmpleado()
+void menuEmpleado(nodoarbol*arbol)
 {
     UsuarioEmpleado empleado = ingresarUsuarioEmpleado();
     int eleccion = 0;
+
 
     do
     {
         if (empleado.nivel == 1) ///administrativo
         {
+            system("cls");
             printf("Tareas administrativas.\n");
-            printf("1: CARGAR PACIENTE\n");
-            printf("2: CARGAR PRACTICAS\n");
-            printf("3: MODIFICAR PRACTICAS\n");
-            printf("4: MOSTRAR EMPLEADOS LABORATORIO\n");
-            printf("5: MOSTRAR PACIENTES LABORATORIO\n");
-            printf("6: CAMBIAR CONTRASENIA\n");
-            printf("7: SALIR\n");
+            printf("1: CARGAR PACIENTE.-\n");
+            printf("2: CARGAR INGRESO.-\n");
+            printf("3: MODIFICAR PRACTICAS.-\n");
+            printf("4: MOSTRAR EMPLEADOS LABORATORIO.-\n");
+            printf("5: MOSTRAR PACIENTES LABORATORIO.-\n");
+            printf("6: CAMBIAR CONTRASENIA.-\n");
+            printf("7: SALIR.-\n");
             printf("Seleccione la opcion que desea utilizar.\n");
 
             fflush(stdin);
@@ -182,29 +187,41 @@ void menuEmpleado()
             switch (eleccion)
             {
             case 1:
-                // cargar paciente arboles
+
+                cargaEnArchivo("pacientes.txt");
+
+
                 break;
             case 2:
-                // cargar practica arboles y listas
+               arbol=pasarArchPacienteToArbol("pacientes.txt",arbol);
+               agregarIngreso("ingresos.txt",arbol);
+
                 break;
+
             case 3:
-                // modificar practicas
+
+
+
                 break;
             case 4:
+
                 mostrarArchEmpleados("empleadosLab.txt");
+                system("pause");
                 break;
             case 5:
-                // Mostrar pacientes laboratorio archivo(adentro de esta funcion mostrar ingresos y poder seleccionar 1)
+                mostrarArchPacientes("pacientes.txt");
+                system("pause");
                 break;
             case 6:
                 cambiarContraseniaEmpleados("UsuariosEmpleados.txt","empleadosLab.txt", empleado);
-                break;
+            break;
             case 7:
                 return; // Salir del bucle y la función
             }
         }
         else if (empleado.nivel == 2) ///nivel 2 tecnico bioquimico
         {
+            system("cls");
             printf("Tareas de laboratorio.\n");
             printf("1: CARGAR RESULTADO\n");
             printf("2: MODIFICAR RESULTADO\n");
@@ -226,7 +243,7 @@ void menuEmpleado()
                 // MODIFICAR RESULTADO
                 break;
             case 3:
-                mostrarArchPracticas("practicasLab.dat");
+                mostrarArchPracticas("practicasLab.txt");
                 break;
             case 4:
                 cambiarContraseniaEmpleados("UsuariosEmpleados.txt","empleadosLab.txt", empleado);
@@ -247,7 +264,7 @@ void menu()
 {
     int eleccion = 0;
     empleados_laboratorio empleado;
-    nodoarbol* adl=inicArbol();
+    nodoarbol* arbol=inicArbol();
 
 
     do
@@ -257,7 +274,7 @@ void menu()
         printf("1: Iniciar sesion.\n");
         printf("2: Crear usuario.\n");
         printf("3: Salir.\n");
-
+    printf("------------------------------------\n");
         printf("Seleccione la opcion que desea utilizar.\n");
 
         fflush(stdin);
@@ -277,13 +294,14 @@ void menu()
             scanf("%i", &eleccion2);
             system("cls");
 
+
             switch (eleccion2)
             {
             case 1:
-                menuPaciente();
+                menuPaciente(arbol);
                 break;
             case 2:
-                menuEmpleado();
+                menuEmpleado(arbol);
                 break;
             case 3:
                 break;
@@ -293,8 +311,22 @@ void menu()
         }
         break;
         case 2:
-            agregarEmpleados("empleadosLab.txt",empleado);
+            printf("Ingrese contrasenia del laboratorio.\n");
+            fflush(stdin);
+            char contra[8];
+            gets(contra);
+            if(strcmp(contra,"labcom7")==0)
+            {
+                agregarEmpleados("empleadosLab.txt",empleado);
+                break;
+            }else
+            {system("cls");
+                printf("Contrasenia del laboratorio incorrecta.\n");
+                system("pause");
+                system("cls");
             break;
+
+            }
         case 3:
             break;
         case 99:

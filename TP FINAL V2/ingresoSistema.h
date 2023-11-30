@@ -6,8 +6,8 @@
 
 UsuarioPaciente ingresarUsuarioPaciente();
 UsuarioEmpleado ingresarUsuarioEmpleado();
-void menuPaciente();
-void menuEmpleado();
+void menuPaciente(nodoarbol* arbol);
+void menuEmpleado(nodoarbol* arbol);
 void menu();
 
 
