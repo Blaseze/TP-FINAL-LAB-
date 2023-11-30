@@ -225,7 +225,7 @@ void menuDios()
         printf("17:Borrar paciente.\n");
         printf("18:Salir del sistema.\n");
 
-        printf("Ingrese el número de la opción deseada: ");
+        printf("Ingrese el numero de la opción deseada: ");
         scanf("%i", &eleccion);
         fflush(stdin);  // Limpiar el buffer del teclado
 

@@ -3,12 +3,12 @@
 void crearUsuarioEmpleado(empleados_laboratorio empleados)
 {
     UsuarioEmpleado aux;
-    FILE* archiEmpleados=fopen("UsuariosEmpleados.dat","ab");
+    FILE* archiEmpleados=fopen("UsuariosEmpleados.txt","ab");
 
 
     if(archiEmpleados)
     {
-        if(strcpy(empleados.perfil,"administrativo")==0)
+        if(strcmpi(empleados.perfil,"administrativo")==0)
         {
             strcpy(aux.usuarioEmpleado,empleados.dni);
             strcpy(aux.contraEmpleado,empleados.passEmpleado);
@@ -25,20 +25,28 @@ void crearUsuarioEmpleado(empleados_laboratorio empleados)
 
         fclose(archiEmpleados);
     }
+
 }
-void cambiarContraseniaEmpleados(char archivoP[30],UsuarioEmpleado empleado)///archivo de empleados
+void cambiarContraseniaEmpleados(char archivoUsu[30], char archivoEmple[30], UsuarioEmpleado empleado)
 {
-    UsuarioEmpleado registro;
-    int i=0;
-    int j=3;
+    UsuarioEmpleado registroUsu;
+    empleados_laboratorio registroEmple;
+    int i = 0;
+    int j = 3;
     char comprobacion[10];
-    int flag=0;
-    FILE*archi=fopen(archivoP,"r+b");
-    if(archi)
+    int flag = 0;
+
+    FILE *archiUsua = fopen(archivoUsu, "r+b");
+    FILE *archiEmpledo = fopen(archivoEmple, "r+b");
+    printf("funciono\n");
+
+    if ((archiUsua != NULL) && (archiEmpledo != NULL))
     {
-        while ((fread(&registro,sizeof(UsuarioEmpleado),1,archi)) && flag==0)
+        printf("funciono1\n");
+
+        while (fread(&registroUsu, sizeof(UsuarioEmpleado), 1, archiUsua) == 1)
         {
-            while(!feof(archi) && registro.usuarioEmpleado==empleado.usuarioEmpleado && j>0)
+            while (strcmp(registroUsu.usuarioEmpleado, empleado.usuarioEmpleado) == 0 && j > 0 && flag == 0)
             {
                 printf("Ingrese nueva contrasenia:\n");
                 fflush(stdin);
@@ -46,18 +54,28 @@ void cambiarContraseniaEmpleados(char archivoP[30],UsuarioEmpleado empleado)///a
                 printf("Ingrese nuevamente contrasenia:\n");
                 fflush(stdin);
                 gets(comprobacion);
-                if(strcmp(empleado.contraEmpleado,comprobacion)==0)
+
+                if (strcmp(empleado.contraEmpleado, comprobacion) == 0)
                 {
-                    flag=1;
-                    fseek(archi,sizeof(UsuarioEmpleado)*(i-1),SEEK_SET);
-                    strcpy(registro.contraEmpleado,empleado.contraEmpleado);
-                    fwrite(&registro,sizeof(UsuarioEmpleado),1,archi);
+                    flag = 1;
+                    fseek(archiUsua, sizeof(UsuarioEmpleado) * i, SEEK_SET);
+                    strcpy(registroUsu.contraEmpleado, empleado.contraEmpleado);
+                    fwrite(&registroUsu, sizeof(UsuarioEmpleado), 1, archiUsua);
+
+                    // Actualizar en el otro archivo
+                    fseek(archiEmpledo, sizeof(empleados_laboratorio) * i, SEEK_SET);
+                    fread(&registroEmple, sizeof(empleados_laboratorio), 1, archiEmpledo);
+
+                    // Copiar la información relevante de UsuarioEmpleado a empleados_laboratorio
+                    strcpy(registroEmple.passEmpleado, empleado.contraEmpleado);
+                    // Resto de campos que necesitas copiar
+                    fwrite(&registroEmple, sizeof(empleados_laboratorio), 1, archiEmpledo);
                 }
                 else
                 {
                     printf("Las contrasenias no coinciden, vuelva a intentarlo\n");
                     j--;
-                    if(j==0)
+                    if (j == 0)
                     {
                         printf("Realizaste demasiados intentos\n");
                     }
@@ -65,9 +83,10 @@ void cambiarContraseniaEmpleados(char archivoP[30],UsuarioEmpleado empleado)///a
             }
             i++;
         }
-        fclose(archi);
-    }
 
+        fclose(archiUsua);
+        fclose(archiEmpledo);
+    }
 }
 void cargarArchEmpleados(char nombreArchivo[])
 {

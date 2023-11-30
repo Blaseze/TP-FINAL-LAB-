@@ -21,12 +21,12 @@ typedef struct
 {
     char usuarioEmpleado[10];
     char contraEmpleado[10];
-     int nivel;
+    int nivel;
 }UsuarioEmpleado;
 
 ///FUNCIONES PRINCIPALES
 void crearUsuarioEmpleado(empleados_laboratorio empleados);
-void cambiarContraseniaEmpleados(char archivoP[30],UsuarioEmpleado empleado);
+void cambiarContraseniaEmpleados(char archivoUsu[30], char archivoEmple[30], UsuarioEmpleado empleado);
 void cargarArchEmpleados(char nombreArchivo[]);
 void guardarUnEmpleado(char nombreArchivo[] , empleados_laboratorio emple);
 void mostrarArchEmpleados(char nombreArchivo[]);
