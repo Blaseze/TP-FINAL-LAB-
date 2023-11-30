@@ -202,7 +202,7 @@
 1701169729 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - version 2\menudios.c
 	"menuDios.h"
 
-1701294941 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\empleado.c
+1701307304 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\empleado.c
 	"empleado.h"
 
 1701294941 c:\users\blase\documents\github\tp-final-lab-\tp final v2\empleado.h
@@ -221,7 +221,7 @@
 1701268004 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\practicas.c
 	"practicas.h"
 
-1701268004 c:\users\blase\documents\github\tp-final-lab-\tp final v2\practicas.h
+1701308543 c:\users\blase\documents\github\tp-final-lab-\tp final v2\practicas.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -250,7 +250,7 @@
 
 1701284109 c:\users\blase\documents\github\tp-final-lab-\tp final v2\menudios.h
 
-1701296457 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\menudios.c
+1701308157 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\menudios.c
 	"menuDios.h"
 	"paciente.h"
 	"ingresoSistema.h"
@@ -259,7 +259,7 @@
 	"string.h"
 	"practicas.h"
 
-1701296563 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\ingresosistema.c
+1701308447 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\ingresosistema.c
 	<stdlib.h>
 	<stdio.h>
 	"paciente.h"
@@ -267,4 +267,13 @@
 	"ingresoSistema.h"
 	"string.h"
 	"menuDios.h"
+
+1701296838 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\paciente.c
+	"paciente.h"
+
+1701307322 source:c:\users\blase\documents\github\tp-final-lab-\gotoxy.c
+	<stdio.h>
+
+1701307322 source:c:\users\blase\documents\github\tp-final-lab-\tp final v2\gotoxy.c
+	<stdio.h>
 

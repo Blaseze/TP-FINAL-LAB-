@@ -58,7 +58,7 @@ UsuarioPaciente ingresarUsuarioPaciente()
     }
     else
         {
-        printf("Inicio de sesión fallido. Cerrando el programa...\n");
+        printf("Inicio de sesion fallido. Cerrando el programa...\n");
         exit(EXIT_FAILURE);
     }
 }
@@ -113,7 +113,7 @@ if (flag == 1)
     }
     else
     {
-        printf("Inicio de sesión fallido. Cerrando el programa...\n");
+        printf("Inicio de sesion fallido. Cerrando el programa...\n");
         exit(EXIT_FAILURE);
     }
 }
@@ -136,6 +136,7 @@ void menuPaciente()
             {
 //            case 1:
 //                mostrarEstudioPaciente(arbol, usuario);
+
 //                break;
             case 2:
                 cambiarContraseniaPacientes("UsuariosPacientes.dat", usuario);
@@ -198,8 +199,6 @@ void menuEmpleado()
                 break;
             case 7:
                 break;
-            default:
-                printf("Opción no válida. Intente de nuevo.\n");
             }
         }
         else if (empleado.nivel == 2) ///nivel 2 tecnico bioquimico
@@ -223,52 +222,50 @@ void menuEmpleado()
                 // MODIFICAR RESULTADO
                 break;
             case 3:
-                // VER PRACTICAS(ADENTRO DE ESTO PERMITIR BUSQUEDA DE PRACTICAS POR TECLADO)
+                mostrarArchPracticas("practicasLab.dat");
                 break;
             case 4:
                 cambiarContraseniaEmpleados("UsuariosEmpleados.dat", empleado);
                 break;
             case 5:
                 break;
-            default:
-                printf("Opción no válida. Intente de nuevo.\n");
             }
         }
         else
         {
-            break; // Salir del bucle si el nivel no es 1 ni 2
+            break;
         }
 
-    } while (1); // El bucle se repetirá hasta que el usuario elija salir manualmente
+    } while (1);
 }
 
 void menu()
 {
     int eleccion = 0;
+nodoarbol* adl=inicArbol();
 
     do
     {
-        printf("Laboratorio de análisis clínico\n\n\n");
+        printf("Laboratorio de analisis clinico\n\n\n");
         printf("------------------------------------\n");
-        printf("1: Iniciar sesión.\n");
+        printf("1: Iniciar sesion.\n");
         printf("2: Crear usuario.\n");
         printf("3: Salir.\n");
 
-        printf("Seleccione la opción que desea utilizar.\n");
+        printf("Seleccione la opcion que desea utilizar.\n");
 
         fflush(stdin);
         scanf("%i", &eleccion);
         system("cls");
-
         switch (eleccion)
         {
         case 1:
             {
                 int eleccion2 = 0;
-                printf("1: Iniciar sesión paciente.\n");
-                printf("2: Iniciar sesión empleado.\n");
+                printf("1: Iniciar sesion paciente.\n");
+                printf("2: Iniciar sesion empleado.\n");
                 printf("3: Salir.\n");
-                printf("Seleccione la opción que desea utilizar.\n");
+                printf("Seleccione la opcion que desea utilizar.\n");
 
                 fflush(stdin);
                 scanf("%i", &eleccion2);
@@ -290,10 +287,10 @@ void menu()
             }
             break;
         case 2:
-            ///crearEmpleado();
+
             break;
         case 3:
-        break;
+            break;
         case 99:
             menuDios();
             break;
@@ -301,6 +298,7 @@ void menu()
             printf("Elección no válida. Intente de nuevo.\n");
         }
 
-    } while (1);
+    } while (eleccion!=3);
 }
+//
 ///

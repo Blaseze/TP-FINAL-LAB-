@@ -8,7 +8,7 @@ void crearUsuarioEmpleado(empleados_laboratorio empleados)
 
     if(archiEmpleados)
     {
-        if(strcmpy(empleados.perfil,"administrativo")==0)
+        if(strcpy(empleados.perfil,"administrativo")==0)
         {
             strcpy(aux.usuarioEmpleado,empleados.dni);
             strcpy(aux.contraEmpleado,empleados.passEmpleado);
