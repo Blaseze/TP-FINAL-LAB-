@@ -82,7 +82,7 @@ typedef struct
 ///STRUCT CREACION USUARIOS
 typedef struct
 {
-    char dniPaciente[30];
+    char usuarioPaciente[30];
     char contrasenia[10];
     int nivel;
 
@@ -93,7 +93,7 @@ typedef struct
 
 ///  FUNCIONES CREACION USUARIO
 void crearUsuarioPaciente(paciente pacienteUsu);
-void cambiarContraseniaPacientes(char archivoP[30],UsuarioPaciente usuario);
+void cambiarContraseniaPacientes(char archivoUsuPaciente[30], char archivoPaciente[30], UsuarioPaciente paciente);
 ///FUNCIONES - PACIENTES
 paciente cargaPaciente(char nombreArchivo[],paciente nuevoPaciente);
 void mostrarArchPacientes(char nombreArchivo[]);
@@ -147,7 +147,7 @@ nodoListaIngresos* pasarArchToListaIng(char nombreArchivo[] , nodoListaIngresos*
 ///FUNCIONES AUXILIARES INGRESOS - PACIENTES
 ingresos cargaDatosIngresos(nodoarbol* arbol , ingresos ingresoPaciente);
 nodoListaIngresos* agregarInicioListaIngresos(nodoListaIngresos* listaIngresos , nodoListaIngresos* nuevoNodoIngreso);
-void mostrarUnIngreso(ingresos ingresoPaciente);
+//void mostrarUnIngreso(ingresos ingresoPaciente);
 
 ///FUNCIONES DE LISTA - PARACTICAS POR INGRESO - PACIENTES
 nodoListaPracXingreso* inicListaPracPorIngreso();

@@ -9,57 +9,122 @@ void crearUsuarioPaciente(paciente pacienteUsu)
 
     if(archiUsuarios)
     {
-        strcpy(usuarioP.dniPaciente,pacienteUsu.dni);
+        strcpy(usuarioP.usuarioPaciente,pacienteUsu.dni);
         strcpy(usuarioP.contrasenia,pacienteUsu.dni);
         fwrite(&usuarioP,sizeof(UsuarioPaciente),1,archiUsuarios);
         usuarioP.nivel=0;
         fclose(archiUsuarios);
     }
 }
-void cambiarContraseniaPacientes(char archivoP[30], UsuarioPaciente usuario)
+//void cambiarContraseniaPacientes(char archivoUsuPaciente[30],char archivoPaciente[30] UsuarioPaciente usuario)
+//{
+//    UsuarioPaciente registro;
+//    int i=0;
+//    int j=3;
+//    char comprobacion[10];
+//    int flag=0;
+//    FILE*archi=fopen(archivoP,"r+b");
+//    if(archi)
+//    {
+//        while ((fread(&registro,sizeof(UsuarioPaciente),1,archi)) && flag==0)
+//        {
+//            while(!feof(archi) && usuario.dniPaciente==registro.dniPaciente && j>0)
+//            {
+//                printf("Ingrese nueva contrasenia:\n");
+//                fflush(stdin);
+//                gets(usuario.contrasenia);
+//                printf("Ingrese nuevamente la contrasenia:\n");
+//                fflush(stdin);
+//                gets(comprobacion);
+//                if(strcmp(usuario.contrasenia,comprobacion)==0)
+//                {
+//                    flag=1;
+//                    fseek(archi,sizeof(UsuarioPaciente)*(i-1),SEEK_SET);
+//                    strcpy(registro.contrasenia,usuario.contrasenia);
+//                    fwrite(&registro,sizeof(UsuarioPaciente),1,archi);
+//                }
+//                else
+//                {
+//                    printf("Las contrasenias no coinciden, vuelva a intentarlo\n");
+//                    j--;
+//                    if(j==0)
+//                    {
+//                        printf("Realizaste demasiados intentos\n");
+//                        break;
+//                    }
+//                }
+//            }
+//            i++;
+//        }
+//        fclose(archi);
+//    }
+//}
+void cambiarContraseniaPacientes(char archivoUsuPaciente[30], char archivoPaciente[30], UsuarioPaciente paciente)
 {
-    UsuarioPaciente registro;
-    int i=0;
-    int j=3;
-    char comprobacion[10];
-    int flag=0;
-    FILE*archi=fopen(archivoP,"r+b");
-    if(archi)
+    UsuarioPaciente registroUsuaPaciente;
+    paciente registroPaciente;
+
+    FILE *archiUsuaPaciente = fopen(archivoUsuPaciente, "r+b");
+    FILE *archiPaciente = fopen(archivoPaciente, "r+b");
+
+    if ((archiUsuaPaciente != NULL) && (archiPaciente != NULL))
     {
-        while ((fread(&registro,sizeof(UsuarioPaciente),1,archi)) && flag==0)
+        char comprobacion[8];
+        while (fread(&registroUsuaPaciente, sizeof(UsuarioPaciente), 1, archiUsuaPaciente))
         {
-            while(!feof(archi) && usuario.dniPaciente==registro.dniPaciente && j>0)
+            if (strcmp(registroUsuaPaciente.usuarioPaciente, paciente.usuarioPaciente) == 0)
             {
                 printf("Ingrese nueva contrasenia:\n");
                 fflush(stdin);
-                gets(usuario.contrasenia);
-                printf("Ingrese nuevamente la contrasenia:\n");
+                gets(paciente.contrasenia);
+                printf("Ingrese nuevamente contrasenia:\n");
                 fflush(stdin);
                 gets(comprobacion);
-                if(strcmp(usuario.contrasenia,comprobacion)==0)
+
+                if (strcmp(paciente.contrasenia, comprobacion) == 0)
                 {
-                    flag=1;
-                    fseek(archi,sizeof(UsuarioPaciente)*(i-1),SEEK_SET);
-                    strcpy(registro.contrasenia,usuario.contrasenia);
-                    fwrite(&registro,sizeof(UsuarioPaciente),1,archi);
+                    // Actualizar en archiUsuaPaciente
+                    fseek(archiUsuaPaciente, -sizeof(UsuarioPaciente), SEEK_CUR);
+                    fwrite(&paciente, sizeof(UsuarioPaciente), 1, archiUsuaPaciente);
+
+                    // Actualizar en archiPaciente
+                    rewind(archiPaciente);
+
+                    FILE *tempFile = fopen("tempfile", "w+b");  // Archivo temporal para escribir los datos actualizados
+
+                    while (fread(&registroPaciente, sizeof(paciente), 1, archiPaciente))
+                    {
+                        if (strcmp(registroPaciente.userEmpleado, paciente.usuarioPaciente) == 0)
+                        {
+                            strcpy(registroPaciente.passEmpleado, paciente.contrasenia);
+                        }
+
+                        fwrite(&registroPaciente, sizeof(paciente), 1, tempFile);
+                    }
+
+                    fclose(archiPaciente);
+                    fclose(tempFile);
+
+                    remove(archivoPaciente);  // Eliminar el archivo antiguo
+                    rename("tempfile", archivoPaciente);  // Renombrar el archivo temporal
+
+                    break;  // Salir del bucle después de encontrar y actualizar el registro
                 }
                 else
                 {
                     printf("Las contrasenias no coinciden, vuelva a intentarlo\n");
-                    j--;
-                    if(j==0)
-                    {
-                        printf("Realizaste demasiados intentos\n");
-                        break;
-                    }
+                    break;
                 }
             }
-            i++;
         }
-        fclose(archi);
+
+        fclose(archiUsuaPaciente);
+    }
+    else
+    {
+        printf("No se pudieron abrir los archivos\n");
     }
 }
-
 /// ---------------------------- FUNCIONES PACIENTE ----------------------------------------------- ///
 int verificaNombre(char nombre[])
 {

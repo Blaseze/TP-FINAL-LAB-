@@ -12,7 +12,7 @@ UsuarioPaciente ingresarUsuarioPaciente()
     UsuarioPaciente usuarioP;
     UsuarioPaciente aux;
     int i=5;
-    FILE*archi=fopen("UsuariosPacientes.dat","r+b");
+    FILE*archi=fopen("UsuariosPacientes.txt","r+b");
     int flag = 0;
     char dni[8];
 
@@ -24,7 +24,7 @@ UsuarioPaciente ingresarUsuarioPaciente()
             printf("-------------------------\n ");
             printf("USUARIO: ");
             fflush(stdin);
-            gets(aux.dniPaciente);
+            gets(aux.usuarioPaciente);
 
             printf("CONTRASENIA: ");
             fflush(stdin);
@@ -33,7 +33,7 @@ UsuarioPaciente ingresarUsuarioPaciente()
 
             while(fread(&usuarioP,sizeof(UsuarioPaciente),1,archi))
             {
-                if(strcmp(aux.dniPaciente,usuarioP.dniPaciente) == 0 && strcmp(aux.contrasenia,usuarioP.contrasenia))
+                if(strcmp(aux.usuarioPaciente,usuarioP.usuarioPaciente) == 0 && strcmp(aux.contrasenia,usuarioP.contrasenia))
                 {
 
                     flag = 1;
@@ -100,7 +100,7 @@ UsuarioEmpleado ingresarUsuarioEmpleado()
 
             if (flag == 0)
             {
-                printf("TE QUEDAN %i INTENTOS\n", i);
+                printf("TE QUEDAN %i INTENTOS\n", (i-1));
                 printf("LA CONTRASENIA O EL USUARIO ES INVALIDO, INTENTE DE NUEVO...\n");
                 i--;
             }
@@ -140,7 +140,7 @@ void menuPaciente()
 
 //                break;
             case 2:
-                cambiarContraseniaPacientes("UsuariosPacientes.dat", usuario);
+                //cambiarContraseniaPacientes("UsuariosPacientes.txt", char archivoPaciente[30],usuario)
                 break;
             case 3:
                 break;
@@ -226,7 +226,7 @@ void menuEmpleado()
                 // MODIFICAR RESULTADO
                 break;
             case 3:
-                mostrarArchPracticas("practicasLab.txt");
+                mostrarArchPracticas("practicasLab.dat");
                 break;
             case 4:
                 cambiarContraseniaEmpleados("UsuariosEmpleados.txt","empleadosLab.txt", empleado);
