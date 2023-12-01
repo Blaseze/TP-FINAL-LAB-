@@ -131,7 +131,7 @@ void menuPaciente(nodoarbol*arbol)
 
     do
     {
-        if(usuario.nivel !=0)
+        if(usuario.nivel !=2 && usuario.nivel!=1)
         {
             system("cls");
             printf("MENU PACIENTE.-\n");
