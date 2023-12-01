@@ -107,6 +107,7 @@ UsuarioEmpleado ingresarUsuarioEmpleado()
                 printf("TE QUEDAN %i INTENTOS\n", (i-1));
                 printf("LA CONTRASENIA O EL USUARIO ES INVALIDO, INTENTE DE NUEVO...\n");
                 i--;
+                rewind(archi);
             }
         }
         fclose(archi);
@@ -140,6 +141,7 @@ void menuPaciente(nodoarbol*arbol)
             printf("Seleccione la opcion que desea utilizar.\n");
             fflush(stdin);
             scanf("%i",&eleccion);
+             system("cls");
             switch(eleccion)
             {
             case 1:
@@ -149,6 +151,8 @@ void menuPaciente(nodoarbol*arbol)
                 cambiarContraseniaPacientes("UsuariosPacientes.txt",usuario);
                 break;
             case 3:
+                printf("Saliendo del menu paciente.-\n");
+                system("pause");
                 break;
             }
         }
@@ -216,6 +220,8 @@ void menuEmpleado(nodoarbol*arbol)
                 cambiarContraseniaEmpleados("UsuariosEmpleados.txt","empleadosLab.txt", empleado);
             break;
             case 7:
+                printf("Saliendo del menu paciente.-\n");
+                system("pause");
                 return; // Salir del bucle y la función
             }
         }
@@ -243,12 +249,15 @@ void menuEmpleado(nodoarbol*arbol)
                 // MODIFICAR RESULTADO
                 break;
             case 3:
-                mostrarArchPracticas("practicasLab.txt");
+                mostrarArchPracticas("practicasLab.dat");
+                system("pause");
                 break;
             case 4:
                 cambiarContraseniaEmpleados("UsuariosEmpleados.txt","empleadosLab.txt", empleado);
                 break;
             case 5:
+                printf("Saliendo del menu paciente.-\n");
+                system("pause");
                 return; // Salir del bucle y la función
             }
         }
@@ -328,6 +337,8 @@ void menu()
 
             }
         case 3:
+            printf("Cerrando programa, hasta pronto.-\n");
+
             break;
         case 99:
             menuDios();
