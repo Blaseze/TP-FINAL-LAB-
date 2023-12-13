@@ -33,6 +33,7 @@ void mostrarAdlEmpleados(celdaPerfil adl[] , int validos);
 
 ///FUNCIONES AUXILIARES
 nodoListaEmpleados* agregarInicioListaEmpleados(nodoListaEmpleados* lista , nodoListaEmpleados* nuevoNodo);
+int contarPerfiles(char nombreArchivo[]);
 int buscarPerfil(celdaPerfil adl[] , int validos , char perfil[]);
 
 #endif // LISTAEMPLEADOS_H_INCLUDED

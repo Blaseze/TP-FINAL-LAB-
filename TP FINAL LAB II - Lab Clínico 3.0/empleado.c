@@ -1,37 +1,41 @@
 #include "empleado.h"
 
-void crearUsuarioEmpleado(empleados_laboratorio empleados)
+//crea un usuario empleado
+void crearUsuarioEmpleado(char dni[],char contra[],char perfil[])
 {
     UsuarioEmpleado aux;
-    FILE* archiEmpleados=fopen("UsuariosEmpleados.dat","ab");
-
+    FILE* archiEmpleados = fopen("UsuariosEmpleados.dat", "ab");
 
     if(archiEmpleados)
     {
-        if(strcmpi(empleados.perfil,"administrativo")==0)
+        if(strcmpi(perfil,"administrativo")==0)
         {
-            strcpy(aux.usuarioEmpleado,empleados.dni);
-            strcpy(aux.contraEmpleado,empleados.passEmpleado);
+            strcpy(aux.usuarioEmpleado,dni);
+            strcpy(aux.contraEmpleado,contra);
             aux.nivel=1;
+
             fwrite(&aux,sizeof(UsuarioEmpleado),1,archiEmpleados);
         }
         else
         {
-            strcpy(aux.usuarioEmpleado,empleados.dni);
-            strcpy(aux.contraEmpleado,empleados.passEmpleado);
+            strcpy(aux.usuarioEmpleado,dni);
+            strcpy(aux.contraEmpleado,contra);
             aux.nivel=2;
+
             fwrite(&aux,sizeof(UsuarioEmpleado),1,archiEmpleados);
         }
+
 
         fclose(archiEmpleados);
     }
 
 }
+//cambia la contraseña del usuario empleado
 void cambiarContraseniaEmpleados(char archivoUsu[30], char archivoEmple[30], UsuarioEmpleado empleado)
 {
     UsuarioEmpleado registroUsu;
     empleados_laboratorio registroEmple;
- char comprobacion[8];
+    char comprobacion[8];
     FILE *archiUsua = fopen(archivoUsu, "r+b");
     FILE *archiEmpledo = fopen(archivoEmple, "r+b");
 
@@ -43,28 +47,26 @@ void cambiarContraseniaEmpleados(char archivoUsu[30], char archivoEmple[30], Usu
         {
             if (strcmp(registroUsu.usuarioEmpleado, empleado.usuarioEmpleado) == 0)
             {
-                printf("Ingrese nueva contrasenia:\n");
+                printf(" Ingrese nueva contrasenia: ");
                 fflush(stdin);
                 gets(empleado.contraEmpleado);
-                printf("Ingrese nuevamente contrasenia:\n");
+                printf(" Ingrese nuevamente contrasenia: ");
                 fflush(stdin);
-
                 gets(comprobacion);
 
                 // Verifica que las contraseñas coincidan
                 if (strcmp(empleado.contraEmpleado, comprobacion) == 0)
                 {
-                    // Actualizar en archiUsua
-                    fseek(archiUsua, -sizeof(UsuarioEmpleado), SEEK_CUR);
-                    fwrite(&empleado, sizeof(UsuarioEmpleado), 1, archiUsua);
-
                     usuarioEncontrado = 1;  // Marcar que se encontró el usuario
+                    // Actualizar en archiUsua
+                    fseek(archiUsua, (-1) * sizeof(UsuarioEmpleado), SEEK_CUR);
+                    fwrite(&empleado, sizeof(UsuarioEmpleado), 1, archiUsua);
 
                     // No salimos del bucle aquí para seguir con la actualización del archivo de empleados
                 }
                 else
                 {
-                    printf("Las contrasenias no coinciden, vuelva a intentarlo\n");
+                    printf("\n Las contrasen%cas no coinciden, vuelva a intentarlo. \n\n" , 164);
                     break;  // Si las contraseñas no coinciden, salimos del bucle
                 }
             }
@@ -80,14 +82,14 @@ void cambiarContraseniaEmpleados(char archivoUsu[30], char archivoEmple[30], Usu
                 if (strcmp(registroEmple.userEmpleado, empleado.usuarioEmpleado) == 0)
                 {
 
-                    fseek(archiEmpledo, -sizeof(empleados_laboratorio), SEEK_CUR);
+                    fseek(archiEmpledo, (-1) * sizeof(empleados_laboratorio), SEEK_CUR);
                     strcpy(registroEmple.passEmpleado,empleado.contraEmpleado);
                     fwrite(&registroEmple, sizeof(empleados_laboratorio), 1, archiEmpledo);
                     break;  // Salir del bucle después de encontrar y actualizar el registro
                 }
             }
 
-            printf("Contraseña actualizada exitosamente.\n");
+            printf("\n Contrase%ca actualizada exitosamente.\n\n" , 164);
         }
 
         fclose(archiUsua);
@@ -95,10 +97,15 @@ void cambiarContraseniaEmpleados(char archivoUsu[30], char archivoEmple[30], Usu
     }
     else
     {
-        printf("No se pudieron abrir los archivos\n");
+        printf("No se pudieron abrir los archivos. \n\n");
     }
 }
 
+//============================================================================================================================//
+
+/// --------------------------------------- FUNCIONES DE ARCHIVOS (EMPLEADO) --------------------------------------- ///
+
+//carga el archivo de empleados
 void cargarArchEmpleados(char nombreArchivo[])
 {
     empleados_laboratorio emple;
@@ -106,24 +113,7 @@ void cargarArchEmpleados(char nombreArchivo[])
     agregarEmpleados(nombreArchivo , emple);
 }
 
-void guardarUnEmpleado(char nombreArchivo[] , empleados_laboratorio emple)
-{
-    FILE *pArchivo = fopen(nombreArchivo , "ab");
-
-    if(pArchivo != NULL){
-        fwrite(&emple , sizeof(empleados_laboratorio) , 1 , pArchivo);
-        fclose(pArchivo);
-
-        printf("\n DATOS DEL EMPLEADO: \n\n");
-        mostrarUnEmpleado(emple);
-
-        printf("\n EMPLEADO CARGADO CON %cXITO \n\n" , 144);
-
-    }else{
-        printf(" ERROR en la apertura del archivo. \n\n");
-    }
-}
-
+//muestra todos los empleados del archivo
 void mostrarArchEmpleados(char nombreArchivo[])
 {
     empleados_laboratorio aux;
@@ -139,66 +129,26 @@ void mostrarArchEmpleados(char nombreArchivo[])
     }
 }
 
-void agregarEmpleados(char nombreArchivo[] , empleados_laboratorio nuevo)
+void mostrarArchEmpleadosSinContra(char nombreArchivo[])
 {
-    char continuar = 's';
-    int existeEmpleado = 0;
+    empleados_laboratorio aux;
+    FILE *pArchivo = fopen(nombreArchivo, "rb");
 
-    while(continuar == 's' || continuar == 'S'){
-        system("cls");
-
-        nuevo = cargaDatosEmpleado(nombreArchivo , nuevo);
-
-        system("cls");
-
-        guardarUnEmpleado(nombreArchivo , nuevo);
-
-        printf("\n %cQuires agregar un nuevo empleado? s=SI / n=NO " , 168);
-        fflush(stdin);
-        continuar = getch();
-        printf("\n\n");
-    }
-}
-
-int contarPerfiles(char nombreArchivo[])
-{
-    empleados_laboratorio auxReg;
-    int numPerfilesUnicos = 0;
-    FILE *pArchivo = fopen(nombreArchivo , "rb");
-
-    if(pArchivo != NULL){
-        char **perfilesUnicos = NULL;
-        int existePerfil = 0;
-        int i = 0;
-
-        while(fread(&auxReg , sizeof(empleados_laboratorio) , 1 , pArchivo) > 0){
-            i = 0;
-            existePerfil = 0;
-            while((i < numPerfilesUnicos) && (existePerfil == 0)){ //busco si ya existe el perfil en el arreglo
-                if(strcmpi(perfilesUnicos[i] , auxReg.perfil) == 0){
-                    existePerfil = 1;
-                }
-                i++;
-            }
-
-            if(existePerfil == 0){
-                char *perfilNuevo = (char *)malloc(strlen(auxReg.perfil) + 1); //asigno memoria al nuevo perfil
-                strcpy(perfilNuevo , auxReg.perfil);
-
-                perfilesUnicos = (char **)realloc(perfilesUnicos , (numPerfilesUnicos + 1) * (sizeof(char *))); //aumento la capacidad del arreglo
-
-                perfilesUnicos[numPerfilesUnicos] = perfilNuevo; //guardo el perfil nuevo
-                numPerfilesUnicos++;
-            }
+    if(pArchivo != NULL)
+    {
+        while(fread(&aux, sizeof(empleados_laboratorio), 1, pArchivo) > 0)
+        {
+            mostrarUnEmpleadoSinContra(aux);
         }
         fclose(pArchivo);
-    }else{
+    }
+    else
+    {
         printf(" ERROR en la lectura del archivo. \n\n");
     }
-
-    return numPerfilesUnicos;
 }
 
+//modifica un empleado
 void modificarEmpleadoEnArchivo(char nombreArchivo[] , char dniEmpleado[])
 {
     empleados_laboratorio auxReg;
@@ -223,7 +173,12 @@ void modificarEmpleadoEnArchivo(char nombreArchivo[] , char dniEmpleado[])
     }
 }
 
-///FUNCIONES AUXILIARES
+/// --------------------------------------- FIN FUNCIONES DE ARCHIVOS (EMPLEADO) --------------------------------------- ///
+
+//============================================================================================================================//
+
+/// ----------------------------------- FUNCIONES AUXILIARES DE ARCHIVOS (EMPLEADO) ------------------------------------ ///
+
 empleados_laboratorio cargaDatosEmpleado(char nombreArchivo[] , empleados_laboratorio emple)
 {
     int verificacionApeYnombre = 0;
@@ -309,20 +264,61 @@ empleados_laboratorio cargaDatosEmpleado(char nombreArchivo[] , empleados_labora
 
         verficacionPerfil = verificarPerfilEmpleado(emple.perfil);
 
-        if(verficacionPerfil != 1 || emple.perfil == 32){
+        if((verficacionPerfil != 1) || (emple.perfil == 32)){
             printf("\n El perfil ingresado no es v%clido. " , 160);
             printf("\n\n");
             system("pause");
         }
     }
 
-    crearUsuarioEmpleado(emple);
-
     emple.estado = 1;
+
+    crearUsuarioEmpleado(emple.dni,emple.passEmpleado,emple.perfil);
 
     return emple;
 }
 
+//guarda el tipo de dato empleado en el archivo
+void guardarUnEmpleado(char nombreArchivo[] , empleados_laboratorio emple)
+{
+    FILE *pArchivo = fopen(nombreArchivo , "ab");
+
+    if(pArchivo != NULL){
+        fwrite(&emple , sizeof(empleados_laboratorio) , 1 , pArchivo);
+        fclose(pArchivo);
+
+        printf("\n DATOS DEL EMPLEADO: \n\n");
+        mostrarUnEmpleado(emple);
+
+        printf("\n EMPLEADO CARGADO CON %cXITO \n\n" , 144);
+
+    }else{
+        printf(" ERROR en la apertura del archivo. \n\n");
+    }
+}
+
+//carga un nuevo empleado en el archivo
+void agregarEmpleados(char nombreArchivo[] , empleados_laboratorio nuevo)
+{
+    char continuar = 's';
+
+    while(continuar == 's' || continuar == 'S'){
+        system("cls");
+
+        nuevo = cargaDatosEmpleado(nombreArchivo , nuevo);
+
+        system("cls");
+
+        guardarUnEmpleado(nombreArchivo , nuevo);
+
+        printf("\n %cQuires agregar un nuevo empleado? s=SI / n=NO " , 168);
+        fflush(stdin);
+        continuar = getch();
+        printf("\n\n");
+    }
+}
+
+//muestra un empleado
 void mostrarUnEmpleado(empleados_laboratorio emple)
 {
     printf("===========================================================\n");
@@ -340,21 +336,33 @@ void mostrarUnEmpleado(empleados_laboratorio emple)
     printf("===========================================================\n\n");
 }
 
-int calculaCantRegistros(char nombreArchivo[] , int tamDato)
+void mostrarUnEmpleadoSinContra(empleados_laboratorio emple)
 {
-   int totalRegistros = 0;
-   FILE *pArchivo = fopen(nombreArchivo , "rb");
+    printf("===========================================================\n");
+    printf(" Apellido y nombre..........: %s \n", emple.apeYnombre);
+    printf(" DNI........................: %s \n", emple.dni);
+    printf(" Usuario....................: %s \n", emple.userEmpleado);
+    printf(" Password...................: ******** \n");
+    printf(" Perfil.....................: %s \n", emple.perfil);
 
-   if(pArchivo != NULL){
-        fseek(pArchivo , tamDato - 1 , SEEK_END);
-        totalRegistros = ftell(pArchivo) / tamDato;
-        fclose(pArchivo);
-   }
-
-   return totalRegistros;
+    if(emple.estado == 1)
+    {
+        printf(" Estado.....................: ALTA \n");
+    }
+    else
+    {
+        printf(" Estado.....................: BAJA \n");
+    }
+    printf("===========================================================\n\n");
 }
 
-/// FUNCIONES DE VERIFICACIONES
+/// ---------------------------------- FIN FUNCIONES AUXILIARES DE ARCHIVOS (EMPLEADO) ---------------------------------- ///
+
+//============================================================================================================================//
+
+/// ------------------------------------- FUNCIONES DE VERIFICACIONES - EMPLEADO ------------------------------------- ///
+
+//verifica si ya se encuentra registrado un empelado en el archivo
 int verificarExistenciaEmpleado(char nombreArchivo[] , char dniEmpleado[])
 {
     int existeEmple = 0;
@@ -373,6 +381,7 @@ int verificarExistenciaEmpleado(char nombreArchivo[] , char dniEmpleado[])
     return existeEmple;
 }
 
+//verifica que el nombre y el apellido del empelado no contenga algún caracter especial o número
 int verificarApeYNombre(char apeYnombreEmpleado[])
 {
     int apeYnombreValido = 1;
@@ -396,6 +405,7 @@ int verificarApeYNombre(char apeYnombreEmpleado[])
     return apeYnombreValido;
 }
 
+//verifica que el DNI sea de la longintud correcta y no tenga ningun caracter especial o letra
 int verificarDni(char dniEmple[])
 {
     int dniValido = 1; //arranco en 1 porque supongo que el dni ingresado es válido
@@ -417,24 +427,7 @@ int verificarDni(char dniEmple[])
     return dniValido;
 }
 
-int verificarExistenciaUsuarioEmpleado(char nombreArchivo[] , char usuarioEmpleado[])
-{
-    int existeUsuarioEmpleado = 0;
-    empleados_laboratorio aux;
-    FILE *pArchivo = fopen(nombreArchivo , "rb");
-
-    if(pArchivo != NULL){
-        while((fread(&aux , sizeof(empleados_laboratorio) , 1 , pArchivo) > 0) && (existeUsuarioEmpleado == 0)){
-            if(strcmpi(aux.userEmpleado , usuarioEmpleado) == 0){
-                existeUsuarioEmpleado = 1;
-            }
-        }
-        fclose(pArchivo);
-    }
-
-    return existeUsuarioEmpleado;
-}
-
+//verifica que el password no este registrado
 int verficarPassEmpleado(char passEmple[])
 {
     int longitudPass = strlen(passEmple);
@@ -456,6 +449,7 @@ int verficarPassEmpleado(char passEmple[])
     return passValido;
 }
 
+//verifica que el perfil asignado al empleado sea el correcto (administrativo , técnico o bioquímico)
 int verificarPerfilEmpleado(char perfilEmpleado[])
 {
     int perfilValido = 0;
@@ -484,6 +478,31 @@ int verificarPerfilEmpleado(char perfilEmpleado[])
     return perfilValido;
 }
 
+//verifica la si existe el usuario tipo empleado
+int verificarExistenciaUsuarioEmpleado(char nombreArchivo[] , char usuarioEmpleado[])
+{
+    int existeUsuarioEmpleado = 0;
+    empleados_laboratorio aux;
+    FILE *pArchivo = fopen(nombreArchivo , "rb");
+
+    if(pArchivo != NULL){
+        while((fread(&aux , sizeof(empleados_laboratorio) , 1 , pArchivo) > 0) && (existeUsuarioEmpleado == 0)){
+            if(strcmpi(aux.userEmpleado , usuarioEmpleado) == 0){
+                existeUsuarioEmpleado = 1;
+            }
+        }
+        fclose(pArchivo);
+    }
+
+    return existeUsuarioEmpleado;
+}
+/// ------------------------------------ FIN FUNCIONES DE VERIFICACIONES - EMPLEADO ------------------------------------ ///
+
+//============================================================================================================================//
+
+/// ------------------------------------- FUNCIONES DE EDICION DE DATOS - EMPLEADO ------------------------------------- ///
+
+//menú que muestra por patalla las opciones para editar los datos de un empleado
 int menuEdicionDatosEmpleado()
 {
     int opcion;
@@ -502,6 +521,7 @@ int menuEdicionDatosEmpleado()
     return opcion;
 }
 
+//edita los datos del empleado
 empleados_laboratorio editarDatosEmpleado(char nombreArchivo[] , empleados_laboratorio emple)
 {
     empleados_laboratorio aux = emple;
@@ -592,7 +612,7 @@ empleados_laboratorio editarDatosEmpleado(char nombreArchivo[] , empleados_labor
 
                 verifPerfilNuevo = verificarPerfilEmpleado(aux.perfil);
 
-                if(verifPerfilNuevo != 1 || aux.perfil == 32){
+                if((verifPerfilNuevo != 1) || (aux.perfil == 32)){
                     printf("\n El perfil ingresado no es v%clido. " , 160);
                     printf("\n\n");
                     system("pause");
@@ -611,7 +631,7 @@ empleados_laboratorio editarDatosEmpleado(char nombreArchivo[] , empleados_labor
         }
     }
 
-    if(opcionEditarDatos != 0){
+    if(opcionEditarDatos == 0){
         system("cls");
         printf(" \n CAMBIO/S REALIZADO CON %cXITO: \n\n" , 144);
         mostrarUnEmpleado(aux);
@@ -621,6 +641,7 @@ empleados_laboratorio editarDatosEmpleado(char nombreArchivo[] , empleados_labor
     return aux;
 }
 
+//da de baja un empleado
 void darBajaEmpleadoArch(char nombreArchivo[] , char dniEmpleado[])
 {
     empleados_laboratorio auxRegEmpleado;
@@ -646,6 +667,7 @@ void darBajaEmpleadoArch(char nombreArchivo[] , char dniEmpleado[])
     mostrarUnEmpleado(emple);
 }
 
+//da de alta un empleado
 void darAltaEmpleadoArch(char nombreArchivo[] , char dniEmpleado[])
 {
     empleados_laboratorio auxRegEmpleado;
@@ -670,3 +692,25 @@ void darAltaEmpleadoArch(char nombreArchivo[] , char dniEmpleado[])
     printf("\n EMPLEADO DADO DE ALTA CON %cXITO. \n\n" , 144);
     mostrarUnEmpleado(emple);
 }
+
+/// ----------------------------------- FIN FUNCIONES DE EDICION DE DATOS - EMPLEADO ----------------------------------- ///
+
+//============================================================================================================================//
+
+/// --------------------------------------- FUNCIONES EXTRAS --------------------------------------- ///
+
+//retorna la cantidad total de registros de un archivo
+int calculaCantRegistros(char nombreArchivo[] , int tamDato)
+{
+   int totalRegistros = 0;
+   FILE *pArchivo = fopen(nombreArchivo , "rb");
+
+   if(pArchivo != NULL){
+        fseek(pArchivo , tamDato - 1 , SEEK_END);
+        totalRegistros = ftell(pArchivo) / tamDato;
+        fclose(pArchivo);
+   }
+
+   return totalRegistros;
+}
+/// ------------------------------------- FIN FUNCIONES EXTRAS ------------------------------------- ///

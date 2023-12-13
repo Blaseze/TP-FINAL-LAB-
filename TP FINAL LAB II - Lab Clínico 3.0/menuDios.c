@@ -1,8 +1,11 @@
 #include "menuDios.h"
 
 ///FUNCIONES DE DISEÑO DEL MENÚ ADMIN
+
+//portada del menú admin
 void portadaMenuAdmin()
 {
+
     gotoxy(33,5);
     printf(GREEN " ========================================== ");
     gotoxy(33,6);
@@ -31,9 +34,9 @@ void portadaMenuAdmin()
     printf(RED " ******** A D M I N I S T R A D O R ******* ");
     gotoxy(33,18);
     printf(GREEN " ========================================== \n\n");
-
 }
 
+//barra de carga
 void progressBar()
 {
     int i, x, y;
@@ -57,7 +60,6 @@ void progressBar()
                 gotoxy(y, 0);
             }
         }
-
     }
 
     gotoxy(4, 18);
@@ -65,53 +67,58 @@ void progressBar()
 
     system("pause");
     system("cls");
-
 }
+/// ==================================================================================================================== ///
 
-///FUNCIONES DEL MENU ADMIN
+///FUNCIONES DEL MENÚ ADMIN
+
+//menú principal de admin
 void menuPrintAdmin()
 {
-    int opcion = 0;
-
     portadaMenuAdmin();
 
     gotoxy(46,20);
     printf(WHITE " 1. EMPLEADO \n");
     gotoxy(46,21);
-    printf(" 2. PR%cCTICA \n" , 181);
+    printf(" 2. PR%cCTICA LAB \n" , 181);
     gotoxy(46,22);
     printf(" 3. PACIENTE \n");
     gotoxy(46,23);
     printf(" 4. INGRESO \n");
     gotoxy(46,24);
-    printf(" 5. RESUTADO DE PR%cCTICA \n" , 181);
+    printf(" 5. CONSULTAS \n");
     gotoxy(46,25);
-    printf(" 6. CONSULTA \n");
-    gotoxy(46,26);
-    printf(" 0. SALIR \n\n");
+    printf(" 6. SALIR \n\n");
 
 }
 
 void menuAdmin()
 {
-    int opcion = 0;
     char archEmpleados[] = {"empleadosLab.dat"};
     char archPracticas[] = {"practicasLab.dat"};
     char archPacientes[] = {"pacientes.dat"};
     char archIngresos[] = {"ingresosPacientes.dat"};
-    char archPxi[] = {"pracXing.dat"};
-    nodoarbol* arbol=inicArbol();
-    arbol=pasarArchPacienteToArbol(archPacientes,arbol);
+    char archPxi[] = {"pracXingPacientes.dat"};
+    int opcion = 0;
 
-    nodoListaPracticas* listaPracticas = inicListaPracticas();
+    nodoarbol* arbol=inicArbol();
     nodoListaIngresos* listaIngresos = inicListaIngresos();
 
+    arbol = pasarArchPacienteToArbol(archPacientes , arbol);
+    listaIngresos = pasarArchToListaIng(archIngresos , listaIngresos);
+
+    system("cls");
+    progressBar();
+
     do{
+        system("cls");
+
         menuPrintAdmin();
 
-        gotoxy(3,30);
+        gotoxy(3,28);
         printf(" Ingresar opci%cn: " , 162);
-        scanf("%d", &opcion);
+        fflush(stdin);
+        scanf("%i", &opcion);
 
         switch(opcion)
         {
@@ -131,27 +138,28 @@ void menuAdmin()
             break;
 
         case 4:
-            subMenuIngreso(opcion , archIngresos , arbol);
+            subMenuIngreso(opcion , archIngresos , arbol , archPxi , archPacientes , archPracticas);
             system("cls");
             break;
 
         case 5:
-            listaPracticas = pasarArchPracToListaPrac(archPracticas , listaPracticas);
-            listaIngresos = pasarArchToListaIng(archIngresos , listaIngresos);
-            subMenuResultadoPractica(opcion , archPxi , listaPracticas , listaIngresos);
+            subMenuConsulas(opcion , arbol , archPacientes , listaIngresos , archPracticas);
+            system("cls");
             break;
 
-        case 0:
+        case 6:
+            printf("\n Saliendo del men%c administrador.... \n\n" , 163);
             break;
 
         default:
             printf("\n OPCI%cN NO V%cLIDA. \n\n" , 224 , 181);
+            system("pause");
         }
 
-    }while(opcion != 0);
-
+    }while(opcion != 6);
 }
 
+// ----------------------------------------------- SUB-MENÚ EMPLEADO ----------------------------------------------- //
 void subMenuPrintEmpleado()
 {
     portadaMenuAdmin();
@@ -169,10 +177,9 @@ void subMenuPrintEmpleado()
     gotoxy(43,25);
     printf(" 6. VER LISTA COMPLETA DE EMPLEADOS \n");
     gotoxy(43,26);
-    printf(" 0. VOLVER \n\n");
+    printf(" 7. VOLVER \n\n");
 }
 
-///SUB MENÚ EMPLEADO
 void subMenuEmpleado(int opcion , char nombreArchEmpleados[])
 {
 
@@ -183,57 +190,57 @@ void subMenuEmpleado(int opcion , char nombreArchEmpleados[])
 
         gotoxy(3,29);
         printf(" Ingresar opci%cn: " , 162);
-        scanf("%d" , &opcion);
+        fflush(stdin);
+        scanf(" %i" , &opcion);
 
         switch(opcion)
         {
         case 1:
-            resSubMenuEmpleadoCase1(nombreArchEmpleados);
+            subMenuEmpleadoCase1(nombreArchEmpleados);
             system("pause");
             break;
 
         case 2:
-            resSubMenuEmpleadoCase2(nombreArchEmpleados);
+            subMenuEmpleadoCase2(nombreArchEmpleados);
             system("pause");
             break;
 
         case 3:
-            resSubMenuEmpleadoCase3(nombreArchEmpleados);
+            subMenuEmpleadoCase3(nombreArchEmpleados);
             system("pause");
             break;
 
         case 4:
             system("cls");
-            resSubMenuEmpleadoCase4(nombreArchEmpleados);
+            subMenuEmpleadoCase4(nombreArchEmpleados);
             system("pause");
             break;
 
         case 5:
             system("cls");
-            resSubMenuEmpleadoCase5(nombreArchEmpleados);
+            subMenuEmpleadoCase5(nombreArchEmpleados);
             system("pause");
             break;
 
         case 6:
             system("cls");
-            resSubMenuEmpleadoCase6(nombreArchEmpleados);
+            subMenuEmpleadoCase6(nombreArchEmpleados);
             system("pause");
             break;
 
-        case 0:
+        case 7:
             break;
 
         default:
             printf("\n OPCI%cN NO V%cLIDA. \n\n" , 224 , 181);
             system("pause");
-            break;
         }
 
-    }while(opcion != 0);
+    }while(opcion != 7);
 }
 
-///FUNCIONES DEL SWITCH SUB MENÚ EMPLEADO
-void resSubMenuEmpleadoCase1(char nombreArchEmpleados[])
+// --------------------------------------- FUNCIONES DEL SUB-MENÚ EMPLEADO --------------------------------------- //
+void subMenuEmpleadoCase1(char nombreArchEmpleados[])
 {
     empleados_laboratorio nuevoEmpleado;
     int totalRegistrosArchEmple = 0;
@@ -242,7 +249,7 @@ void resSubMenuEmpleadoCase1(char nombreArchEmpleados[])
 
     system("cls");
 
-    printf(" EMPLEADOS CARGADOS: \n\n");
+    printf("\n EMPLEADOS CARGADOS: \n\n");
     mostrarArchEmpleados(nombreArchEmpleados);
 
     totalRegistrosArchEmple = calculaCantRegistros(nombreArchEmpleados , sizeof(empleados_laboratorio));
@@ -250,7 +257,7 @@ void resSubMenuEmpleadoCase1(char nombreArchEmpleados[])
     printf(" Se han registrado un total de %d empleados. \n\n" , totalRegistrosArchEmple);
 }
 
-void resSubMenuEmpleadoCase2(char nombreArchEmpleados[])
+void subMenuEmpleadoCase2(char nombreArchEmpleados[])
 {
     char dniEmpleado[9];
     int dniValido = 0;
@@ -278,7 +285,7 @@ void resSubMenuEmpleadoCase2(char nombreArchEmpleados[])
     darBajaEmpleadoArch(nombreArchEmpleados , dniEmpleado);
 }
 
-void resSubMenuEmpleadoCase3(char nombreArchEmpleados[])
+void subMenuEmpleadoCase3(char nombreArchEmpleados[])
 {
     char dniEmpleado[9];
     int dniValido = 0;
@@ -306,7 +313,7 @@ void resSubMenuEmpleadoCase3(char nombreArchEmpleados[])
     darAltaEmpleadoArch(nombreArchEmpleados , dniEmpleado);
 }
 
-void resSubMenuEmpleadoCase4(char nombreArchEmpleados[])
+void subMenuEmpleadoCase4(char nombreArchEmpleados[])
 {
     char dniEmpleado[9];
     int dniValido = 0;
@@ -334,7 +341,7 @@ void resSubMenuEmpleadoCase4(char nombreArchEmpleados[])
     modificarEmpleadoEnArchivo(nombreArchEmpleados , dniEmpleado);
 }
 
-void resSubMenuEmpleadoCase5(char nombreArchEmpleados[])
+void subMenuEmpleadoCase5(char nombreArchEmpleados[])
 {
     int cantPerfilesEmpleados = 0;
     celdaPerfil *adlEmpleados = NULL;
@@ -354,7 +361,7 @@ void resSubMenuEmpleadoCase5(char nombreArchEmpleados[])
     }
 }
 
-void resSubMenuEmpleadoCase6(char nombreArchEmpleados[])
+void subMenuEmpleadoCase6(char nombreArchEmpleados[])
 {
     empleados_laboratorio auxRegEmpleado;
     nodoListaEmpleados* listaCompletaEmpleados = inicListaEmpleados();
@@ -378,29 +385,32 @@ void resSubMenuEmpleadoCase6(char nombreArchEmpleados[])
     }
 
 }
-///FIN FUNCIONES DEL SWITCH SUB MENÚ EMPLEADO
+// --------------------------------------- FIN FUNCIONES DEL SUB-MENÚ EMPLEADO --------------------------------------- //
 
+/// ===================================================================================================================== ///
+
+// ------------------------------------------------ SUB-MENÚ PRÁCTICA ------------------------------------------------ //
 void subMenuPrintPractica()
 {
     portadaMenuAdmin();
 
     gotoxy(40,20);
-    printf(WHITE " 1. AGREGAR PR%cCTICA \n" , 181);
+    printf(WHITE " 1. AGREGAR PR%cCTICA LAB \n" , 181);
     gotoxy(40,21);
-    printf(" 2. DAR BAJA PR%cCTICA \n" , 181);
+    printf(" 2. DAR BAJA PR%cCTICA LAB \n" , 181);
     gotoxy(40,22);
-    printf(" 3. DAR ALTA PR%cCTICA \n" , 181);
+    printf(" 3. DAR ALTA PR%cCTICA LAB \n" , 181);
     gotoxy(40,23);
-    printf(" 4. EDITAR DATOS DE LA PR%cCTICA \n" , 181);
+    printf(" 4. EDITAR DATOS DE LA PR%cCTICA LAB \n" , 181);
     gotoxy(40,24);
-    printf(" 5. VER LISTA DE PR%cCTICAS \n" , 181);
+    printf(" 5. VER LISTA DE PR%cCTICAS LAB \n" , 181);
     gotoxy(40,25);
-    printf(" 0. VOLVER \n\n");
+    printf(" 6. VOLVER \n\n");
 }
 
-///FUNCIONES DEL SWITCH SUB MENÚ PRACTICA
 void subMenuPractica(int opcion , char nombreArchPracticas[])
 {
+
     do{
         system("cls");
 
@@ -408,48 +418,49 @@ void subMenuPractica(int opcion , char nombreArchPracticas[])
 
         gotoxy(3,29);
         printf(" Ingresar opci%cn: " , 162);
-        scanf("%d" , &opcion);
+        fflush(stdin);
+        scanf("%i" , &opcion);
 
         switch(opcion)
         {
         case 1:
-            resSubMenuPracticaCase1(nombreArchPracticas);
+            subMenuPracticaCase1(nombreArchPracticas);
             system("pause");
             break;
 
         case 2:
-            resSubMenuPracticaCase2(nombreArchPracticas);
+            subMenuPracticaCase2(nombreArchPracticas);
             system("pause");
             break;
 
         case 3:
-            resSubMenuPracticaCase3(nombreArchPracticas);
+            subMenuPracticaCase3(nombreArchPracticas);
             system("pause");
             break;
 
         case 4:
-            resSubMenuPracticaCase4(nombreArchPracticas);
+            subMenuPracticaCase4(nombreArchPracticas);
             system("pause");
             break;
         case 5:
             system("cls");
-            resSubMenuPracticaCase5(nombreArchPracticas);
+            subMenuPracticaCase5(nombreArchPracticas);
             system("pause");
             break;
 
-        case 0:
+        case 6:
             break;
 
         default:
             printf("\n OPCI%cN NO V%cLIDA. \n\n" , 224 , 181);
             system("pause");
-            break;
         }
 
-    }while(opcion != 0);
+    }while(opcion != 6);
 }
 
-void resSubMenuPracticaCase1(char nombreArchPracticas[])
+// --------------------------------------- FUNCIONES DEL SUB-MENÚ PRÁCTICA --------------------------------------- //
+void subMenuPracticaCase1(char nombreArchPracticas[])
 {
     int totalRegistrosArchPrac = 0;
 
@@ -457,7 +468,7 @@ void resSubMenuPracticaCase1(char nombreArchPracticas[])
 
     system("cls");
 
-    printf(" PR%cCTICAS CARGADAS: \n\n" , 181);
+    printf(" PR%cCTICAS DE LABORATORIO CARGADAS: \n\n" , 181);
     mostrarArchPracticas(nombreArchPracticas);
 
     totalRegistrosArchPrac = calculaCantRegistros(nombreArchPracticas , sizeof(practicas));
@@ -465,66 +476,68 @@ void resSubMenuPracticaCase1(char nombreArchPracticas[])
     printf(" Se han registrado un total de %d pr%ccticas. \n\n" , totalRegistrosArchPrac , 160);
 }
 
-void resSubMenuPracticaCase2(char nombreArchPracticas[])
+void subMenuPracticaCase2(char nombreArchPracticas[])
 {
     int nroPractica = 0;
 
-    printf("\n Ingresar nro. de pr%cctica:" , 160);
+    printf("\n Ingresar nro. de pr%cctica de laboratorio:" , 160);
     scanf("%d" , &nroPractica);
 
     darBajaPrac(nombreArchPracticas , nroPractica);
 }
 
-void resSubMenuPracticaCase3(char nombreArchPracticas[])
+void subMenuPracticaCase3(char nombreArchPracticas[])
 {
     int nroPractica = 0;
 
-    printf("\n Ingresar nro. de pr%cctica:" , 160);
+    printf("\n Ingresar nro. de pr%cctica de laboratorio:" , 160);
     scanf("%d" , &nroPractica);
 
     darAltaPrac(nombreArchPracticas , nroPractica);
 }
 
-void resSubMenuPracticaCase4(char nombreArchPracticas[])
+void subMenuPracticaCase4(char nombreArchPracticas[])
 {
     int nroPracticaAMod = 0;
 
-    printf("\n Ingresar nro. de pr%cctica: " , 160);
+    printf("\n Ingresar nro. de pr%cctica de laboratorio: " , 160);
     scanf("%d" , &nroPracticaAMod);
 
     modificarPractica(nombreArchPracticas , nroPracticaAMod);
 }
 
-void resSubMenuPracticaCase5(char nombreArchPracticas[])
+void subMenuPracticaCase5(char nombreArchPracticas[])
 {
     nodoListaPracticas* listaPracticas = inicListaPracticas();
 
     listaPracticas = pasarArchPracToListaPrac(nombreArchPracticas , listaPracticas);
 
-    printf("\n LISTA DE PR%cCTICAS DISPONIBLES: \n\n" , 181);
+    printf("\n LISTA DE PR%cCTICAS DE LABORATORIO DISPONIBLES: \n\n" , 181);
     mostrarListaPractica(listaPracticas);
 }
-///FIN FUNCIONES DEL SWITCH SUB MENÚ PRACTICA
+// ------------------------------------- FIN FUNCIONES DEL SUB-MENÚ PRÁCTICA ------------------------------------- //
 
+/// ===================================================================================================================== ///
+
+// ------------------------------------------------ SUB-MENÚ PACIENTE ------------------------------------------------ //
 void subMenuPrintPaciente()
 {
     portadaMenuAdmin();
 
-    gotoxy(40,20);
+    gotoxy(42,20);
     printf(WHITE " 1. AGREGAR PACIENTE \n");
-    gotoxy(40,21);
+    gotoxy(42,21);
     printf(" 2. DAR BAJA PACIENTE \n");
-    gotoxy(40,22);
+    gotoxy(42,22);
     printf(" 3. DAR ALTA PACIENTE \n");
-    gotoxy(40,23);
+    gotoxy(42,23);
     printf(" 4. EDITAR DATOS DEL PACIENTE \n");
-    gotoxy(40,24);
+    gotoxy(42,24);
     printf(" 5. VER LISTA DE PACIENTES \n");
-    gotoxy(40,25);
-    printf(" 0. VOLVER \n\n");
+    gotoxy(42,25);
+    printf(" 6. VOLVER \n\n");
 }
 
-///FUNCIONES DEL SWITCH SUB MENÚ PACIENTE
 void subMenuPaciente(int opcion , char nombreArchPaciente[])
 {
     do{
@@ -534,51 +547,52 @@ void subMenuPaciente(int opcion , char nombreArchPaciente[])
 
         gotoxy(3,28);
         printf(" Ingresar opci%cn: " , 162);
-        scanf("%d" , &opcion);
+        fflush(stdin);
+        scanf("%i" , &opcion);
 
         switch(opcion)
         {
         case 1:
-            resSubMenuPacienteCase1(nombreArchPaciente);
+            subMenuPacienteCase1(nombreArchPaciente);
             system("pause");
             break;
 
         case 2:
             system("cls");
-            resSubMenuPacienteCase2(nombreArchPaciente);
+            subMenuPacienteCase2(nombreArchPaciente);
             system("pause");
             break;
 
         case 3:
             system("cls");
-            resSubMenuPacienteCase3(nombreArchPaciente);
+            subMenuPacienteCase3(nombreArchPaciente);
             system("pause");
             break;
 
         case 4:
             system("cls");
-            resSubMenuPacienteCase4(nombreArchPaciente);
+            subMenuPacienteCase4(nombreArchPaciente);
             break;
 
         case 5:
             system("cls");
-            resSubMenuPacienteCase5(nombreArchPaciente);
+            subMenuPacienteCase5(nombreArchPaciente);
             system("pause");
             break;
 
-        case 0:
+        case 6:
             break;
 
         default:
             printf("\n OPCI%cN NO V%cLIDA. \n\n" , 224 , 181);
             system("pause");
-            break;
         }
 
-    }while(opcion != 0);
+    }while(opcion != 6);
 }
 
-void resSubMenuPacienteCase1(char nombreArchPaciente[])
+// --------------------------------------- FUNCIONES DEL SUB-MENÚ PACIENTE --------------------------------------- //
+void subMenuPacienteCase1(char nombreArchPaciente[])
 {
     int totalRegistrosArchPacientes = 0;
 
@@ -586,7 +600,7 @@ void resSubMenuPacienteCase1(char nombreArchPaciente[])
 
     system("cls");
 
-    printf(" PACIENTES CARGADOS: \n\n" , 181);
+    printf(" PACIENTES CARGADOS: \n\n");
     mostrarArchPacientes(nombreArchPaciente);
 
     totalRegistrosArchPacientes = calculaCantRegistros(nombreArchPaciente , sizeof(paciente));
@@ -594,7 +608,7 @@ void resSubMenuPacienteCase1(char nombreArchPaciente[])
     printf(" Se han registrado un total de %d pacientes. \n\n" , totalRegistrosArchPacientes);
 }
 
-void resSubMenuPacienteCase2(char nombreArchPaciente[])
+void subMenuPacienteCase2(char nombreArchPaciente[])
 {
     char dniPac[9];
     int dniValido = 0;
@@ -618,7 +632,7 @@ void resSubMenuPacienteCase2(char nombreArchPaciente[])
     darBajaPacienteArch(nombreArchPaciente , dniPac);
 }
 
-void resSubMenuPacienteCase3(char nombreArchPaciente[])
+void subMenuPacienteCase3(char nombreArchPaciente[])
 {
     char dniPac[9];
     int dniValido = 0;
@@ -642,10 +656,10 @@ void resSubMenuPacienteCase3(char nombreArchPaciente[])
     darAltaPacienteArch(nombreArchPaciente , dniPac);
 }
 
-void resSubMenuPacienteCase4(char nombreArchPaciente[])
+void subMenuPacienteCase4(char nombreArchPaciente[])
 {
     char dniPac[9];
-    int dniValido = 0;
+    int dniValido;
     int existePaciente = 0;
 
     printf("\n Ingresar DNI del paciente: ");
@@ -665,7 +679,7 @@ void resSubMenuPacienteCase4(char nombreArchPaciente[])
     }
 }
 
-void resSubMenuPacienteCase5(char nombreArchPaciente[])
+void subMenuPacienteCase5(char nombreArchPaciente[])
 {
     nodoListaPaciente* listaPacietes = iniclistaPaciente();
 
@@ -673,67 +687,87 @@ void resSubMenuPacienteCase5(char nombreArchPaciente[])
 
     printf("\n LISTA DE PACIENTES: \n\n");
     mostrarListaPaciente(listaPacietes);
-
 }
-/// FIN FUNCIONES DEL SWITCH SUB MENÚ PACIENTE
+// ------------------------------------- FIN FUNCIONES DEL SUB-MENÚ PACIENTE ------------------------------------- //
 
+/// ===================================================================================================================== ///
+
+// ------------------------------------------------ SUB-MENÚ INGRESO ------------------------------------------------ //
 void subMenuPrintIngreso()
 {
     portadaMenuAdmin();
 
-    gotoxy(40,20);
-    printf(WHITE " 1. AGREGAR INGRESO \n");
-    gotoxy(40,21);
-    printf(" 2. DAR BAJA INGRESO \n");
-    gotoxy(40,22);
-    printf(" 3. DAR ALTA INGRESO \n");
-    gotoxy(40,23);
-    printf(" 4. EDITAR DATOS DEL INGRESO \n");
-    gotoxy(40,24);
-    printf(" 5. VER LISTA DE INGRESOS \n");
-    gotoxy(40,25);
-    printf(" 0. VOLVER \n\n");
+    gotoxy(43,20);
+    printf(WHITE "  1. AGREGAR INGRESO \n");
+    gotoxy(43,21);
+    printf("  2. DAR BAJA INGRESO \n");
+    gotoxy(43,22);
+    printf("  3. DAR ALTA INGRESO \n");
+    gotoxy(43,23);
+    printf("  4. EDITAR DATOS DEL INGRESO \n");
+    gotoxy(43,24);
+    printf("  5. VER PACIENTES E INGRESOS ASOCIADOS \n" , 181);
+    gotoxy(43,25);
+    printf("  6. VER LISTA DE INGRESOS DE UN PACIENTE \n");
+    gotoxy(43,26);
+    printf("  7. VER LISTA DE PR%cCTICAS DE UN PACIENTE \n" , 181);
+    gotoxy(43,27);
+    printf("  8. VER LISTA DE PR%cCTICAS COMPLETA \n" , 181);
+    gotoxy(43,28);
+    printf("  9. CARGAR RESULTADO DE UNA PR%cCTICA \n" , 181);
+    gotoxy(43,29);
+    printf(" 10. MODIFICAR RESULTADO DE UNA PR%cCTICA \n" , 181);
+    gotoxy(43,30);
+    printf(" 11. MODIFICAR UNA PR%cCTICA \n" , 181);
+    gotoxy(43,31);
+    printf(" 12. VOLVER \n\n");
 }
 
-/// FUNCIONES DEL SWITCH SUB MENÚ INGRESO
-void subMenuIngreso(int opcion , char nombreArchIngresos[] , nodoarbol* arbolPacientes)
+void subMenuIngreso(int opcion , char nombreArchIngresos[] , nodoarbol* arbolPacientes , char nombreArchPxi[] , char nombreArchPac[] , char nombreArchPrac[])
 {
     char dniPac[9];
     int dniValido = 0;
+    int numIngreso = 0;
+    int numPractica = 0;
 
     do{
         system("cls");
 
         subMenuPrintIngreso();
 
-        gotoxy(3,28);
+        gotoxy(3,34);
         printf(" Ingresar opci%cn: " , 162);
-        scanf("%d" , &opcion);
+        fflush(stdin);
+        scanf("%i" , &opcion);
 
         switch(opcion)
         {
         case 1:
-            resSubMenuIngresoCase1(nombreArchIngresos , arbolPacientes);
+            subMenuIngresoCase1(nombreArchIngresos , arbolPacientes);
             system("pause");
             break;
 
         case 2:
-            resSubMenuIngresoCase2(nombreArchIngresos);
+            subMenuIngresoCase2(nombreArchIngresos);
             system("pause");
            break;
 
         case 3:
-            resSubMenuIngresoCase3(nombreArchIngresos);
+            subMenuIngresoCase3(nombreArchIngresos);
             system("pause");
             break;
 
         case 4:
-            resSubMenuIngresoCase4(nombreArchIngresos);
             system("cls");
+            subMenuIngresoCase4(nombreArchIngresos);
             break;
 
         case 5:
+            subMenuIngresoCase5(nombreArchPac , nombreArchIngresos  , arbolPacientes);
+            system("pause");
+            break;
 
+        case 6:
             while(dniValido != 1){
                 printf("\n Ingresar DNI: ");
                 fflush(stdin);
@@ -742,13 +776,89 @@ void subMenuIngreso(int opcion , char nombreArchIngresos[] , nodoarbol* arbolPac
                 dniValido = verificaDni(dniPac);
 
                 if(dniValido == 1){
-                    resSubMenuIngresoCase5(nombreArchIngresos , dniPac);
+                    subMenuIngresoCase6(nombreArchIngresos , dniPac);
                     system("pause");
                 }else{
                     printf("\n El DNI ingresado no es v%clido o no se encuentra registrado. \n\n" , 160);
                 }
             }
+            dniValido = 0;
+            break;
 
+        case 7:
+            while(dniValido != 1){
+                printf("\n Ingresar DNI: ");
+                fflush(stdin);
+                gets(dniPac);
+
+                dniValido = verificaDni(dniPac);
+
+                if(dniValido == 1){
+                    subMenuIngresoCase7(nombreArchPxi , dniPac);
+                    system("pause");
+                }else{
+                    printf("\n El DNI ingresado no es v%clido o no se encuentra registrado. \n\n" , 160);
+                }
+            }
+            dniValido = 0;
+            break;
+
+        case 8:
+            subMenuIngresoCase8(nombreArchPxi);
+            system("pause");
+            break;
+
+        case 9:
+            cargarResultadoPxi(nombreArchPxi);
+            system("pause");
+            break;
+
+        case 10:
+            while(dniValido != 1){
+                printf("\n Ingresar DNI: ");
+                fflush(stdin);
+                gets(dniPac);
+
+                dniValido = verificaDni(dniPac);
+
+                if(dniValido == 1){
+                    system("cls");
+                    printf("\n PR%cCTICAS DEL PACIENTE CON EL DNI: %s \n\n" , 181 , dniPac);
+                    mostrarArchRegPracPorPaciente(nombreArchPxi , dniPac);
+                    system("pause");
+                    printf("\n Ingresar nro. de ingreso: ");
+                    scanf("%d" , &numIngreso);
+                    printf(" Ingresar nro. de pr%cctica: " , 160);
+                    scanf("%d" , &numPractica);
+
+                    modificarResultado(nombreArchPxi , dniPac , numIngreso , numPractica);
+                    system("pause");
+                }else{
+                    printf("\n El DNI ingresado no es v%clido o no se encuentra registrado. \n\n" , 160);
+                }
+            }
+            dniValido = 0;
+            break;
+
+        case 11:
+            while(dniValido != 1){
+                printf("\n Ingresar DNI: ");
+                fflush(stdin);
+                gets(dniPac);
+
+                dniValido = verificaDni(dniPac);
+
+                if(dniValido == 1){
+                    modificarPxi(nombreArchPxi , dniPac , nombreArchPrac);
+                    system("pause");
+                }else{
+                    printf("\n El DNI ingresado no es v%clido o no se encuentra registrado. \n\n" , 160);
+                }
+            }
+            dniValido = 0;
+            break;
+
+        case 12:
             break;
 
         default:
@@ -756,10 +866,11 @@ void subMenuIngreso(int opcion , char nombreArchIngresos[] , nodoarbol* arbolPac
             system("pause");
         }
 
-    }while(opcion != 0);
+    }while(opcion != 12);
 }
 
-void resSubMenuIngresoCase1(char nombreArchIngresos[] , nodoarbol* arbolPacientes)
+// --------------------------------------- FUNCIONES DEL SUB-MENÚ INGRESO --------------------------------------- //
+void subMenuIngresoCase1(char nombreArchIngresos[] , nodoarbol* arbolPacientes)
 {
     int totalRegistrosArchIngresos = 0;
 
@@ -776,7 +887,7 @@ void resSubMenuIngresoCase1(char nombreArchIngresos[] , nodoarbol* arbolPaciente
 
 }
 
-void resSubMenuIngresoCase2(char nombreArchIngresos[])
+void subMenuIngresoCase2(char nombreArchIngresos[])
 {
     int nroIngreso = 0;
 
@@ -786,7 +897,7 @@ void resSubMenuIngresoCase2(char nombreArchIngresos[])
     darBajaIngresoArch(nombreArchIngresos , nroIngreso);
 }
 
-void resSubMenuIngresoCase3(char nombreArchIngresos[])
+void subMenuIngresoCase3(char nombreArchIngresos[])
 {
     int nroIngreso = 0;
 
@@ -796,10 +907,11 @@ void resSubMenuIngresoCase3(char nombreArchIngresos[])
     darAltaIngresoArch(nombreArchIngresos , nroIngreso);
 }
 
-void resSubMenuIngresoCase4(char nombreArchIngresos[])
+void subMenuIngresoCase4(char nombreArchIngresos[])
 {
     int nroIngresoMod = 0;
 
+    printf("\n INGRESOS REGISTRADOS: \n\n");
     mostrarArchIngresos(nombreArchIngresos);
 
     printf("\n Ingresar nro. de ingreso a modificar: ");
@@ -808,165 +920,318 @@ void resSubMenuIngresoCase4(char nombreArchIngresos[])
     modificarIngresoArch(nombreArchIngresos , nroIngresoMod);
 }
 
-void resSubMenuIngresoCase5(char nombreArchIngresos[] , char dniPac[])
+void subMenuIngresoCase5(char nombreArchPac[] , char nombreArchIngresos[] , nodoarbol* arbolPacientes)
 {
+    arbolPacientes = cargaAdlPacientes(nombreArchPac , arbolPacientes , nombreArchIngresos);
+
+    if(arbolPacientes != NULL){
+        system("cls");
+        printf("\n LISTA DE PACIENTES CON SUS INGRESOS Y PR%cCTICAS: \n\n" , 181);
+        mostrarAdlPacientes(arbolPacientes);
+    }else{
+        printf(" NO HAY DATOS CARGADOS. \n\n");
+    }
+}
+
+void subMenuIngresoCase6(char nombreArchIngresos[] , char dniPac[])
+{
+    system("cls");
+    printf("\n INGRESOS DEL PACIENTE CON EL DNI: %s \n\n" , dniPac);
     mostrarArchIngresosPaciente(nombreArchIngresos , dniPac);
 }
-/// FIN FUNCIONES DEL SWITCH SUB MENÚ PACIENTE
 
-void subMenuPrintResultadoDePractica()
+void subMenuIngresoCase7(char nombreArchPxi[] , char dniPac[])
+{
+    system("cls");
+    printf("\n PR%cCTICAS DEL PACIENTE CON EL DNI: %s \n\n" , 181 , dniPac);
+    mostrarArchRegPracPorPaciente(nombreArchPxi , dniPac);
+}
+
+void subMenuIngresoCase8(char nombreArchPxi[])
+{
+    system("cls");
+    printf("\n LISTA DE PR%cCTICAS \n\n" , 181);
+    mostrarArchRegPracCompleta(nombreArchPxi);
+}
+// ------------------------------------- FIN FUNCIONES DEL SUB-MENÚ INGRESO ------------------------------------- //
+
+/// ===================================================================================================================== ///
+
+// --------------------------------------------- SUB-MENÚ CONSULTAS --------------------------------------------- //
+void subMenuPrintConsultas()
 {
     portadaMenuAdmin();
 
     gotoxy(40,20);
-    printf(WHITE " 1. AGREGAR RESULTADO \n");
+    printf(WHITE " 1. BUSCAR PACIENTE POR DNI \n");
     gotoxy(40,21);
-    printf(" 2. EDITAR NRO. PR%cCTICA / RESULTADO \n" , 181);
+    printf(" 2. BUSCAR PACIENTES POR NOMBRE \n");
     gotoxy(40,22);
-    printf(" 3. VER LISA DE RESULTADOS \n\n");
+    printf(" 3. BUSCAR INGRESO DE UN PACIENTE POR DNI \n");
     gotoxy(40,23);
-    printf(" 0. VOLVER \n\n");
+    printf(" 4. BUSCAR INGRESOS POR RANGO DE FECHA \n");
+    gotoxy(40,24);
+    printf(" 5. BUSCAR PR%cCTICA DE LABORATORIO \n" , 181);
+    gotoxy(40,25);
+    printf(" 6. VOLVER \n\n");
 }
 
-///FUNCIONES DEL SWITCH SUB MENÚ RESULTADO PRÁCTICA
-void subMenuResultadoPractica(int opcion , char nombreArchPxi[] , nodoListaPracticas* listPrac , nodoListaIngresos* listIng)
+void subMenuConsulas(int opcion , nodoarbol* arbol , char nombreArchPac[] , nodoListaIngresos* listaIng , char nombreArchPractica[])
 {
+    char dniPac[9];
+    int dniValido;
+    char apeYnombrePaciente[30];
+    int nombreYapeValido;
+    char fechaDesde[11];
+    char fechaHasta[11];
+    int fechaIngresoDesdeValida;
+    int fechaIngresoHastaValida;
+    char nombrePractica[50];
 
     do{
         system("cls");
 
-        subMenuPrintResultadoDePractica();
+        subMenuPrintConsultas();
 
         gotoxy(3,28);
         printf(" Ingresar opci%cn: " , 162);
-        scanf("%d" , &opcion);
+        fflush(stdin);
+        scanf("%i" , &opcion);
 
         switch(opcion)
         {
         case 1:
-            resSubMenuResultadoPracticaCase1(nombreArchPxi , listPrac , listIng);
-            system("pause");
+            while(dniValido != 1){
+                system("cls");
+
+                printf("\n Ingresar DNI: ");
+                fflush(stdin);
+                gets(dniPac);
+
+                dniValido = verificaDni(dniPac);
+
+                if(dniValido == 1){
+                    system("cls");
+                    subMenuConsultasCase1(arbol , dniPac);
+                    system("pause");
+                }else{
+                    printf("\n El DNI ingresado no es v%clido o no se encuentra registrado. \n\n" , 160);
+                }
+            }
+            dniValido = 0; //reinicio la variable para reutilizarla
             break;
 
         case 2:
-            //resSubMenuResultadoPracticaCase2(nombreArchPxi , listPrac , listIng);
-            //system("pause");
+            while(nombreYapeValido != 1){
+                system("cls");
+
+                printf("\n Ingresar apellido o nombre del paciente: ");
+                fflush(stdin);
+                gets(apeYnombrePaciente);
+
+                nombreYapeValido = verificaNombre(apeYnombrePaciente);
+
+                if(nombreYapeValido == 1){
+                    system("cls");
+                    printf("\n PACIENTES CON APELLIDO O NOMBRE O QUE COMIENCEN CON: %s \n\n" , apeYnombrePaciente);
+                    subMenuConsultasCase2(nombreArchPac , apeYnombrePaciente);
+                    system("pause");
+                }else{
+                    printf("\n El nombre ingresado no existe o es inv%clido. \n\n" , 160);
+                    system("pause");
+                }
+            }
+            nombreYapeValido = 0; //reinicio la variable para reutilizarla
             break;
 
         case 3:
-            resSubMenuResultadoPracticaCase3(nombreArchPxi);
+            while(dniValido != 1){
+                system("cls");
+
+                printf("\n Ingresar DNI: ");
+                fflush(stdin);
+                gets(dniPac);
+
+                dniValido = verificaDni(dniPac);
+
+                if(dniValido == 1){
+                    system("cls");
+                    subMenuConsultasCase3(listaIng , dniPac);
+                    system("pause");
+                }else{
+                    printf("\n El DNI ingresado no es v%clido o no se encuentra registrado. \n\n" , 160);
+                    system("pause");
+                }
+            }
+            dniValido = 0; //reinicio la variable para reutilizarla
+            break;
+
+        case 4:
+            while((fechaIngresoDesdeValida != 1) && (fechaIngresoHastaValida != 1)){
+                system("cls");
+
+                printf("\n Ingresar rango de fecha (mismo formato - dd/mm/aaaa ; d/m/aa ; dd/mm/aa): \n\n");
+                printf(" Fecha desde: ");
+                fflush(stdin);
+                gets(fechaDesde);
+
+                printf(" Fecha hasta: ");
+                fflush(stdin);
+                gets(fechaHasta);
+
+                fechaIngresoDesdeValida = validarFecha(fechaDesde);
+                fechaIngresoHastaValida = validarFecha(fechaHasta);
+
+                if(fechaIngresoDesdeValida == 1 && fechaIngresoHastaValida == 1){
+                    system("cls");
+                    printf("\n INGRESOS DE PACIENTES CON FECHA DESDE %s HASTA %s \n\n" , fechaDesde , fechaHasta);
+                    subMenuConsultasCase4(listaIng , fechaDesde , fechaHasta);
+                    system("pause");
+                }else{
+                    printf(" La/s fecha/s ingresada/s es/son inv%clida/s. \n\n" , 160);
+                    system("pause");
+                }
+            }
+            //reinicio ambas variables
+            fechaIngresoDesdeValida = 0;
+            fechaIngresoHastaValida = 0;
+            break;
+
+        case 5:
+            system("cls");
+            printf("\n Ingresar nombre de la pr%cctica de lab: " , 160);
+            fflush(stdin);
+            gets(nombrePractica);
+
+            system("cls");
+            printf("\n PR%cCTICAS DE LABORATORIOS CON EL NOMBRE O QUE COMIENZA CON: %s \n\n" , 181 , nombrePractica);
+            subMenuConsultasCase5(nombreArchPractica , nombrePractica);
             system("pause");
             break;
 
-        case 0:
+        case 6:
             break;
 
         default:
             printf("\n OPCI%cN NO V%cLIDA. \n\n" , 224 , 181);
             system("pause");
-            break;
         }
 
-    }while(opcion != 0);
+    }while(opcion != 6);
 }
 
-void resSubMenuResultadoPracticaCase1(char nombreArchPxi[] , nodoListaIngresos* listaIng , nodoListaPracticas* listaPrac)
+// -------------------------------------- FUNCIONES DEL SUB-MENÚ CONSULTAS -------------------------------------- //
+void subMenuConsultasCase1(nodoarbol* arbol , char dniPac[])
 {
-    int totalRegistrosArchPxi = 0;
-    regPracticasPacientes auxReg;
+    nodoarbol* pacienteEncontrado = buscarPacienteArbol(arbol , dniPac);
 
-    agregarPracticasPorIngreso(nombreArchPxi , listaIng , listaPrac);
-
-    system("cls");
-
-    printf(" RESULTADOS CARGADOS: \n\n");
-    mostrarArchPracticasPorIngreso(nombreArchPxi);
-
-    totalRegistrosArchPxi = calculaCantRegistros(nombreArchPxi , sizeof(practicaXingreso));
-
-    printf(" Se han registrado un total de %d resultados. \n\n" , totalRegistrosArchPxi);
-}
-
-//void resSubMenuResultadoPracticaCase2(char nombreArchPxi[] , nodoListaPracticas* listaPrac , nodoListaIngresos* listaIng)
-//{
-//    modificarPxi(nombreArchPxi , listaIng , listaPrac);
-//}
-
-void resSubMenuResultadoPracticaCase3(char nombreArchPxi[])
-{
-    system("cls");
-
-    printf("\n RESULTADOS CARGADOS: \n\n");
-    mostrarArchPracticasPorIngreso(nombreArchPxi);
-}
-///FIN FUNCIONES DEL SWITCH SUB MENÚ RESULTADO PRÁCTICA
-
-void subMenuPrintConsulta()
-{
-    portadaMenuAdmin();
-
-    gotoxy(40,20);
-    printf(WHITE " 1. BUSCAR EMPLEADO \n");
-    gotoxy(40,21);
-    printf(" 2. BUSCAR PR%cCTICA \n" , 181);
-    gotoxy(40,22);
-    printf(" 3. BUSCAR PACIENTE \n");
-    gotoxy(40,23);
-    printf(" 4. BUSCAR INGRESO \n");
-    gotoxy(40,24);
-    printf(" 5. BUSCAR RESULTADO DE UNA PR%cCTICA \n" , 181);
-    gotoxy(40,25);
-    printf(" 0. VOLVER \n\n");
-}
-
-///FUNCIONES DEL SWITCH SUB MENÚ RESULTADO CONSULTA
-void subMenuConsulta(int opcion , nodoListaEmpleados* listaEmpleados , nodoarbol* arbolPacientes , nodoListaPracticas* listaPrac ,nodoListaIngresos* listaIng , nodoListaPracXingreso* listaPxi)
-{
-    char dniEmpleado[9];
-    char dniPaciente[9];
-    nodoListaEmpleados* empleadoEncontrado;
-    int nroPracAbuscar = 0;
-    nodoListaPracticas* practicaEncontrada;
-
-    do{
+    if(pacienteEncontrado != NULL){
         system("cls");
-
-        gotoxy(3,28);
-        printf(" Ingresar opci%cn: " , 162);
-        scanf("%d" , &opcion);
-
-        switch(opcion)
-        {
-        case 1:
-            printf(" Ingresar DNI del empleado: ");
-            fflush(stdin);
-            gets(dniEmpleado);
-
-            empleadoEncontrado = buscarEmpleadoLista(listaEmpleados , dniEmpleado);
-
-            if(empleadoEncontrado != NULL){
-                system("cls");
-                printf("\n El DNI %s pertenece a: \n\n" , dniEmpleado);
-                mostrarUnEmpleado(empleadoEncontrado->dato);
-            }else{
-                printf(" El DNI ingresado es incorrecto o no se encuentra registrado. \n\n");
-            }
-            break;
-
-        case 2:
-            printf(" Ingresar nro. de pr%cctica: " , 160);
-            gets(dniPaciente);
-
-            practicaEncontrada = buscarPractica(listaPrac , nroPracAbuscar);
-
-            if(practicaEncontrada != NULL){
-                system("cls");
-                printf("\n El nro. de pr%cctica pertenece a: \n\n" , 160 , nroPracAbuscar);
-                mostrarUnaPractica(practicaEncontrada->datosPracticas);
-            }else{
-                printf(" El nro. de pr%cctica es incorrecto o no se encuentra registrado. \n\n" , 160);
-            }
-        }
-    }while(opcion==1 || opcion==2);
+        printf("\n El paciente con el DNI %s pertenece a: \n\n" , dniPac);
+        mostrarPaciente(pacienteEncontrado->dato);
+    }else{
+        printf("\n El DNI ingresado no es v%clido o no se encuentra registrado. \n\n" , 160);
+    }
 }
 
+void subMenuConsultasCase2(char nombreArchPacientes[] , char apeyNombreA[])
+{
+    nodoListaPaciente* listaPacientes = iniclistaPaciente();
+    listaPacientes = pasarArchPacToListaPac(nombreArchPacientes , listaPacientes);
+    nodoListaPaciente* seg = listaPacientes;
+    int rtaComparacionChars = 0;
+
+    if(seg != NULL){
+        while(seg != NULL){
+            rtaComparacionChars = strncasecmp(seg->datosPac.apellidoYnombre , apeyNombreA , strlen(apeyNombreA));
+
+            if(rtaComparacionChars == 0 || strcmpi(apeyNombreA , seg->datosPac.apellidoYnombre) == 0){ //la función strncasecmp no hace diferencia entre mayusculas y minúsuclas
+                mostrarPaciente(seg->datosPac);
+            }
+
+            seg = seg->siguiente;
+        }
+    }
+}
+
+void subMenuConsultasCase3(nodoListaIngresos* listaIng , char dniPac[])
+{
+    ingresos ingresoEncontrado = buscarIngresoPorDni(listaIng , dniPac);
+
+    if(strcmp(ingresoEncontrado.dniPaciente , dniPac) == 0){
+        system("cls");
+        printf("\n El ingreso con el DNI %s corresponde a: \n\n" , dniPac);
+        mostrarUnIngreso(ingresoEncontrado);
+    }else{
+        printf("\n El DNI ingresado no es v%clido o no se encuentra registrado. \n\n" , 160);
+    }
+}
+
+void subMenuConsultasCase4(nodoListaIngresos* listaIng, char fechaDesde[], char fechaHasta[])
+{
+    nodoListaIngresos* seg = listaIng;
+    Fecha fechaDesdeStruct, fechaHastaStruct;
+    obtenerFechaDesdeCadena(fechaDesde, &fechaDesdeStruct);
+    obtenerFechaDesdeCadena(fechaHasta, &fechaHastaStruct);
+
+    if (seg != NULL) {
+        while (seg != NULL) {
+            Fecha fechaIngresoStruct;
+            obtenerFechaDesdeCadena(seg->datosIngresoPac.fechaIngreso, &fechaIngresoStruct);
+
+            if (compararFechas(fechaIngresoStruct, fechaDesdeStruct) >= 0 &&compararFechas(fechaIngresoStruct, fechaHastaStruct) <= 0) {
+                mostrarUnIngreso(seg->datosIngresoPac);
+            }
+            seg = seg->siguiente;
+        }
+    }
+}
+
+void subMenuConsultasCase5(char nombreArchPrac[] , char nombrePrac[])
+{
+    nodoListaPracticas* listaPracticas = inicListaPracticas();
+    listaPracticas = pasarArchPracToListaPrac(nombreArchPrac , listaPracticas);
+    nodoListaPracticas* seg = listaPracticas;
+    int rtaComparacionChars = 0;
+
+    if(seg != NULL){
+        while(seg != NULL){
+            rtaComparacionChars = strncasecmp(nombrePrac , seg->datosPracticas.nombrePractica , strlen(nombrePrac)); //la función strncasecmp no hace diferencia entre mayusculas y minúsuclas
+
+            if((rtaComparacionChars == 0) || strcmpi(nombrePrac , seg->datosPracticas.nombrePractica) == 0){
+                mostrarUnaPractica(seg->datosPracticas);
+            }
+
+            seg = seg->siguiente;
+        }
+    }else{
+        printf("\n NO hay pr%ccticas cargadas o el nombre ingresado es incorrecto. \n\n" , 160);
+    }
+}
+// ------------------------------------- FIN FUNCIONES DEL SUB-MENÚ CONSULTAS ------------------------------------- //
+
+///FUNCIONES EXTRAS
+void obtenerFechaDesdeCadena(char fechaStr[], Fecha *fecha) {
+    sscanf(fechaStr, "%d/%d/%d", &fecha->dia, &fecha->mes, &fecha->anio);
+}
+
+int compararFechas(Fecha fecha1, Fecha fecha2) {
+    struct tm tm1 = { .tm_year = fecha1.anio - 1900, .tm_mon = fecha1.mes - 1, .tm_mday = fecha1.dia };
+    struct tm tm2 = { .tm_year = fecha2.anio - 1900, .tm_mon = fecha2.mes - 1, .tm_mday = fecha2.dia };
+
+    time_t t1 = mktime(&tm1);
+    time_t t2 = mktime(&tm2);
+
+    if (t1 == -1 || t2 == -1) {
+        // Error en la conversión
+        return 0;
+    }
+
+    if (t1 < t2) {
+        return -1;
+    } else if (t1 > t2) {
+        return 1;
+    } else {
+        return 0; // Fechas iguales
+    }
+}

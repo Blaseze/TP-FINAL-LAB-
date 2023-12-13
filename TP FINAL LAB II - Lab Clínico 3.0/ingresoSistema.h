@@ -9,6 +9,8 @@ UsuarioEmpleado ingresarUsuarioEmpleado();
 void menuPaciente();
 void menuEmpleado(nodoarbol* arbol);
 void menu();
-
+void portadaInicio();
+void portadaInicioEstatica();
+void leerPassword(char pass[]);
 
 #endif // INGRESOSISTEMA_H_INCLUDED
