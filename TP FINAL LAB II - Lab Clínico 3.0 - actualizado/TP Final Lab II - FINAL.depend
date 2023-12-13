@@ -1,0 +1,427 @@
+# depslib dependency file v1.0
+1701416303 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\empleado.c
+	"empleado.h"
+
+1701416294 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\empleado.h
+	<stdlib.h>
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+
+1701428141 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\main.c
+	<stdio.h>
+	<stdlib.h>
+	"colors.h"
+	"paciente.h"
+
+1491400450 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1701428124 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\menudios.c
+	"menuDios.h"
+
+1701400443 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\menudios.h
+	<stdlib.h>
+	<stdio.h>
+	"gotoxy.h"
+	"colors.h"
+	"listaEmpleados.h"
+	"paciente.h"
+
+1701378021 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\colors.h
+
+1491399896 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\gotoxy.h
+
+1701394892 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\listaempleados.c
+	"listaEmpleados.h"
+
+1701394892 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\listaempleados.h
+	"empleado.h"
+
+1701398404 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\practicas.c
+	"practicas.h"
+
+1701374164 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\practicas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1701420961 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\paciente.c
+	"paciente.h"
+
+1701420983 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - final\paciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+	"practicas.h"
+
+1701434977 source:c:\users\blase\downloads\drive-download-20231201t122125z-001\empleado.c
+	"empleado.h"
+
+1701435072 c:\users\blase\downloads\drive-download-20231201t122125z-001\empleado.h
+	<stdlib.h>
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+
+1701411804 source:c:\users\blase\downloads\drive-download-20231201t122125z-001\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1701411804 source:c:\users\blase\downloads\drive-download-20231201t122125z-001\listaempleados.c
+	"listaEmpleados.h"
+
+1701411806 c:\users\blase\downloads\drive-download-20231201t122125z-001\listaempleados.h
+	"empleado.h"
+
+1701434977 source:c:\users\blase\downloads\drive-download-20231201t122125z-001\main.c
+	<stdio.h>
+	<stdlib.h>
+	"colors.h"
+	"paciente.h"
+
+1701411804 c:\users\blase\downloads\drive-download-20231201t122125z-001\colors.h
+
+1701435072 c:\users\blase\downloads\drive-download-20231201t122125z-001\paciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+	"practicas.h"
+
+1701411806 c:\users\blase\downloads\drive-download-20231201t122125z-001\practicas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1701435072 source:c:\users\blase\downloads\drive-download-20231201t122125z-001\paciente.c
+	"paciente.h"
+
+1701411806 source:c:\users\blase\downloads\drive-download-20231201t122125z-001\practicas.c
+	"practicas.h"
+
+1701433425 source:c:\users\blase\downloads\drive-download-20231201t122125z-001\menudios.c
+	"menuDios.h"
+
+1701411806 c:\users\blase\downloads\drive-download-20231201t122125z-001\menudios.h
+	<stdlib.h>
+	<stdio.h>
+	"gotoxy.h"
+	"colors.h"
+	"listaEmpleados.h"
+	"paciente.h"
+
+1701411804 c:\users\blase\downloads\drive-download-20231201t122125z-001\gotoxy.h
+
+1701435148 source:c:\users\blase\downloads\drive-download-20231201t122125z-001\ingresosistema.c
+	<stdlib.h>
+	<stdio.h>
+	"paciente.h"
+	"empleado.h"
+	"ingresoSistema.h"
+	"string.h"
+	"menuDios.h"
+
+1701376232 c:\users\blase\downloads\drive-download-20231201t122125z-001\ingresosistema.h
+	"empleado.h"
+	"paciente.h"
+
+1701434977 source:c:\users\blase\desktop\drive-download-20231201t122125z-001\empleado.c
+	"empleado.h"
+
+1701435072 c:\users\blase\desktop\drive-download-20231201t122125z-001\empleado.h
+	<stdlib.h>
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+
+1701411804 source:c:\users\blase\desktop\drive-download-20231201t122125z-001\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1701411804 source:c:\users\blase\desktop\drive-download-20231201t122125z-001\listaempleados.c
+	"listaEmpleados.h"
+
+1701411806 c:\users\blase\desktop\drive-download-20231201t122125z-001\listaempleados.h
+	"empleado.h"
+
+1701434977 source:c:\users\blase\desktop\drive-download-20231201t122125z-001\main.c
+	<stdio.h>
+	<stdlib.h>
+	"colors.h"
+	"paciente.h"
+
+1701411804 c:\users\blase\desktop\drive-download-20231201t122125z-001\colors.h
+
+1701535951 c:\users\blase\desktop\drive-download-20231201t122125z-001\paciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+	"practicas.h"
+
+1701411806 c:\users\blase\desktop\drive-download-20231201t122125z-001\practicas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1701480986 source:c:\users\blase\desktop\drive-download-20231201t122125z-001\menudios.c
+	"menuDios.h"
+
+1701411806 c:\users\blase\desktop\drive-download-20231201t122125z-001\menudios.h
+	<stdlib.h>
+	<stdio.h>
+	"gotoxy.h"
+	"colors.h"
+	"listaEmpleados.h"
+	"paciente.h"
+
+1701411804 c:\users\blase\desktop\drive-download-20231201t122125z-001\gotoxy.h
+
+1701536339 source:c:\users\blase\desktop\drive-download-20231201t122125z-001\paciente.c
+	"paciente.h"
+
+1701534226 source:c:\users\blase\desktop\drive-download-20231201t122125z-001\practicas.c
+	"practicas.h"
+
+1701535987 source:c:\users\blase\desktop\drive-download-20231201t122125z-001\ingresosistema.c
+	<stdlib.h>
+	<stdio.h>
+	"paciente.h"
+	"empleado.h"
+	"ingresoSistema.h"
+	"string.h"
+	"menuDios.h"
+
+1701376232 c:\users\blase\desktop\drive-download-20231201t122125z-001\ingresosistema.h
+	"empleado.h"
+	"paciente.h"
+
+1701434977 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\empleado.c
+	"empleado.h"
+
+1701435072 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\empleado.h
+	<stdlib.h>
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+
+1701411804 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1701747917 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\ingresosistema.c
+	<stdlib.h>
+	<stdio.h>
+	"paciente.h"
+	"empleado.h"
+	"ingresoSistema.h"
+	"string.h"
+	"menuDios.h"
+
+1701647617 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\paciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+	"practicas.h"
+
+1701411806 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\practicas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1701646276 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\ingresosistema.h
+	"empleado.h"
+	"paciente.h"
+
+1701411806 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\menudios.h
+	<stdlib.h>
+	<stdio.h>
+	"gotoxy.h"
+	"colors.h"
+	"listaEmpleados.h"
+	"paciente.h"
+
+1701411804 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\gotoxy.h
+
+1701411804 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\colors.h
+
+1701411806 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\listaempleados.h
+	"empleado.h"
+
+1701411804 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\listaempleados.c
+	"listaEmpleados.h"
+
+1701434977 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\main.c
+	<stdio.h>
+	<stdlib.h>
+	"colors.h"
+	"paciente.h"
+
+1701746887 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\menudios.c
+	"menuDios.h"
+
+1701534226 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\practicas.c
+	"practicas.h"
+
+1701650960 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final que anda\drive-download-20231201t122125z-001\paciente.c
+	"paciente.h"
+
+1702428740 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\empleado.c
+	"empleado.h"
+
+1702407623 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\empleado.h
+	<stdlib.h>
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+
+1701411804 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1702428684 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\ingresosistema.c
+	<stdlib.h>
+	<stdio.h>
+	"string.h"
+	"paciente.h"
+	"empleado.h"
+	"ingresoSistema.h"
+	"menuDios.h"
+
+1702466083 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\paciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+	"practicas.h"
+
+1701411806 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\practicas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1702403500 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\ingresosistema.h
+	"empleado.h"
+	"paciente.h"
+
+1702379526 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\menudios.h
+	<stdlib.h>
+	<stdio.h>
+	"gotoxy.h"
+	"colors.h"
+	"listaEmpleados.h"
+	"paciente.h"
+
+1701411804 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\gotoxy.h
+
+1702261409 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\colors.h
+	<stdio.h>
+	<stdlib.h>
+
+1702240233 e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\listaempleados.h
+	"empleado.h"
+
+1702259505 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\listaempleados.c
+	"listaEmpleados.h"
+
+1702290257 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1701534226 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\practicas.c
+	"practicas.h"
+
+1702405550 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\menudios.c
+	"menuDios.h"
+
+1702465017 source:e:\tecnicatura universitaria en programación\1er año\2do cuatrimestre\programación y laboratorio ii (2023)\tp final - lab ii\tp final lab ii - lab clínico 3.0\paciente.c
+	"paciente.h"
+
+1702469981 source:c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\empleado.c
+	"empleado.h"
+
+1702469981 c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\empleado.h
+	<stdlib.h>
+	<stdio.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+
+1702469981 source:c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1702469981 source:c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\listaempleados.c
+	"listaEmpleados.h"
+
+1702469981 c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\listaempleados.h
+	"empleado.h"
+
+1702469981 source:c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1702480134 source:c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\menudios.c
+	"menuDios.h"
+
+1702479579 c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\menudios.h
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	"gotoxy.h"
+	"colors.h"
+	"listaEmpleados.h"
+	"paciente.h"
+
+1702469981 c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\gotoxy.h
+
+1702469981 c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\colors.h
+	<stdio.h>
+	<stdlib.h>
+
+1702479793 c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\paciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<ctype.h>
+	"practicas.h"
+
+1702469981 c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\practicas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1702481072 source:c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\paciente.c
+	"paciente.h"
+
+1702469981 source:c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\practicas.c
+	"practicas.h"
+
+1702480159 source:c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\ingresosistema.c
+	<stdlib.h>
+	<stdio.h>
+	"string.h"
+	"paciente.h"
+	"empleado.h"
+	"ingresoSistema.h"
+	"menuDios.h"
+
+1702469981 c:\users\usuario\downloads\tp final lab ii - lab clínico 3.0-20231213t121746z-001\tp final lab ii - lab clínico 3.0\ingresosistema.h
+	"empleado.h"
+	"paciente.h"
+
