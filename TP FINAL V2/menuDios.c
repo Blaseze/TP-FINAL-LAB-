@@ -36,12 +36,13 @@
 //
 //
 //
-//        printf("Ingrese el número de la opción deseada: ");
+//        printf("Ingrese el nï¿½mero de la opciï¿½n deseada: ");
 //        scanf("%i", &eleccion);
 //system("cls");
 //        switch (eleccion) {
 //            case 1:
-////
+//            crearUsuarioPaciente(paciente pacienteUsu)
+//            
 ////                break;
 ////            case 2:
 ////                mostrarAdlPacientes(arbol),
@@ -98,10 +99,10 @@
 ////                   eliminar_nodo_de_arbol(adl,dni);
 ////                break;
 //            case 18:
-//                printf("Saliendo del programa. ¡Hasta luego!\n");
+//                printf("Saliendo del programa. ï¿½Hasta luego!\n");
 //                break;
 //            default:
-//                printf("Opción no válida. Por favor, elija nuevamente.\n");
+//                printf("Opciï¿½n no vï¿½lida. Por favor, elija nuevamente.\n");
 //        }
 //    } while (eleccion != 18);
 //
@@ -148,25 +149,25 @@
 //                // Modificar paciente
 //                // break;
 //            case 4:
-//                // Cambiar contraseña paciente
+//                // Cambiar contraseï¿½a paciente
 //                // break;
 //            case 5:
-//                // Ingresar práctica paciente
+//                // Ingresar prï¿½ctica paciente
 //                // break;
 //            case 6:
-//                // Modificar práctica paciente
+//                // Modificar prï¿½ctica paciente
 //                // break;
 //            case 7:
-//                // Cargar resultados prácticas
+//                // Cargar resultados prï¿½cticas
 //                // break;
 //            case 8:
-//                // Mostrar prácticas
+//                // Mostrar prï¿½cticas
 //                // break;
 //            case 9:
-//                // Modificar prácticas
+//                // Modificar prï¿½cticas
 //                // break;
 //            case 10:
-//                // Agregar prácticas
+//                // Agregar prï¿½cticas
 //                // break;
 //            case 11:
 //                // Mostrar ingresos
@@ -178,7 +179,7 @@
 //                // Mostrar empleado
 //                // break;
 //            case 14:
-//                // Cambiar contraseña empleado
+//                // Cambiar contraseï¿½a empleado
 //                // break;
 //            case 15:
 //                // Modificar empleados
@@ -193,7 +194,7 @@
 //                printf("Saliendo del programa. Hasta luego!\n");
 //                break;
 //            default:
-//                printf("Opción no válida. Por favor, elija nuevamente.\n");
+//                printf("Opciï¿½n no vï¿½lida. Por favor, elija nuevamente.\n");
 //        }
 //    } while (eleccion != 18);
 //}
@@ -242,25 +243,25 @@ void menuDios()
                 // Modificar paciente
                 // break;
             case 4:
-                // Cambiar contraseña paciente
+                // Cambiar contraseï¿½a paciente
                 // break;
             case 5:
-                // Ingresar práctica paciente
+                // Ingresar prï¿½ctica paciente
                 // break;
             case 6:
-                // Modificar práctica paciente
+                // Modificar prï¿½ctica paciente
                 // break;
             case 7:
-                // Cargar resultados prácticas
+                // Cargar resultados prï¿½cticas
                 // break;
             case 8:
-                // Mostrar prácticas
+                // Mostrar prï¿½cticas
                 // break;
             case 9:
-                // Modificar prácticas
+                // Modificar prï¿½cticas
                 // break;
             case 10:
-                // Agregar prácticas
+                // Agregar prï¿½cticas
                 // break;
             case 11:
                 // Mostrar ingresos
@@ -272,7 +273,7 @@ void menuDios()
                 // Mostrar empleado
                 // break;
             case 14:
-                // Cambiar contraseña empleado
+                // Cambiar contraseï¿½a empleado
                 // break;
             case 15:
                 // Modificar empleados
@@ -285,7 +286,7 @@ void menuDios()
                 // break;
             case 18:
                 if (eleccion == 18) {
-                    printf("Saliendo del programa. ¡Hasta luego!\n");
+                    printf("Saliendo del programa. ï¿½Hasta luego!\n");
                 }
                 break;
             default:
